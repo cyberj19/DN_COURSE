@@ -6,8 +6,8 @@ namespace C17_Ex01_05
     class Program
     {
         const uint k_AmountOfDigitsInNumber = 10;
-        const char k_zeroDigit = '0';
-        const char k_nineDigit = '9';
+        const char k_ZeroDigit = '0';
+        const char k_NineDigit = '9';
 
         static void Main(string[] args)
         {
@@ -90,7 +90,7 @@ namespace C17_Ex01_05
         // Gets the biggest digit in a numeric string
         private static uint getBiggestDigitInNumericString(string i_NumericStr)
         {
-            char maxDigit = k_zeroDigit;
+            char maxDigit = k_ZeroDigit;
 
             foreach (char digit in i_NumericStr)
             {
@@ -106,7 +106,7 @@ namespace C17_Ex01_05
         // Gets the smallest digit in a numeric string
         private static uint getSmallestDigitInNumericString(string i_NumericStr)
         {
-            char minDigit = k_nineDigit;
+            char minDigit = k_NineDigit;
 
             foreach (char digit in i_NumericStr)
             {
