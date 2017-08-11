@@ -77,12 +77,12 @@ namespace C17_Ex01_03
         {
             System.Console.WriteLine("String Analysis:");
             bool v_isPalindrome = isPalindrome(i_Str);
-            System.Console.WriteLine("Input string is " + ((v_isPalindrome)?"":"not ") + "a Palindrome!");
+            System.Console.WriteLine("Input string is " + (v_isPalindrome?"":"not ") + "a Palindrome!");
             int o_NumberFromString;
             bool isNumeric = int.TryParse(i_Str, out o_NumberFromString);
             if (isNumeric)
             {
-                uint digitsAverage = calculateDigitsAverage(o_NumberFromString);                 // digits average
+                float digitsAverage = calculateDigitsAverage(o_NumberFromString);                 // digits average
 
                 System.Console.WriteLine("Input numeric string has a digit's average of {0}", digitsAverage);
             }
@@ -108,7 +108,7 @@ namespace C17_Ex01_03
             return upperCaseCharsCounter;
         }
         
-        private static uint calculateDigitsAverage(int i_Number)
+        private static float calculateDigitsAverage(int i_Number)
         {
             uint digitsCounter = 0;
             uint digitsSum = 0;
@@ -118,7 +118,7 @@ namespace C17_Ex01_03
                 digitsCounter++;
                 digitsSum += (uint)number % 10;
             }
-            return digitsSum / digitsCounter;
+            return (float)digitsSum / digitsCounter;
         }
 
 
