@@ -35,7 +35,7 @@ namespace C17_Ex01_04
         // Checks whether a string contains exclusively numeric or alphabetic characters but not both
         private static bool isAlphabeticOrNumericString(string i_Str)
         {
-            return isAlphabeticString(i_Str) || isNumericString(i_Str);
+            return IsAlphabeticString(i_Str) || IsNumericString(i_Str);
         }
 
         // Checks whether a string contains only alphabetic characters
@@ -78,7 +78,7 @@ namespace C17_Ex01_04
             System.Console.WriteLine("===================={0}String Analysis:{0}====================", System.Environment.NewLine);
             System.Console.WriteLine("Input string is {0}a Palindrome!", isPalindromeString(i_Str) ? string.Empty : "not ");
 
-            if (isNumericString(i_Str))
+            if (IsNumericString(i_Str))
             {
                 System.Console.WriteLine("Input numeric string has a digit's average of {0}", calculateDigitsAverage(i_Str));
             }
