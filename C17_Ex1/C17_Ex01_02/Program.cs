@@ -49,7 +49,7 @@
             return hourGlassStrBuilder.ToString();
         }
 
-        private static System.Text.StringBuilder generateHourGlassLine(uint i_NumAsterisks, uint i_LineSize, char i_HourGlassChar)
+        private static System.Text.StringBuilder generateHourGlassLine(uint i_NumAsterisks, uint i_LineSize, char i_HourGlassChar) //todo: maybe use default value i_HourGlassChar='*'
         {
             System.Text.StringBuilder lineStrBuilder = new System.Text.StringBuilder();
 
