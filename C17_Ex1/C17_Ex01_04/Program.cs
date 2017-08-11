@@ -4,23 +4,26 @@ namespace C17_Ex01_04
 {
     class Program
     {
+        const uint k_NumOfCharsInString = 10;
+
         static void Main(string[] args)
         {
             AnalyzeStringFromUser();
         }
 
+        // Getting an input string from user and analyzes it
         public static void AnalyzeStringFromUser()
         {
-            string userInputStr = getStringFromUserAndAnalyze();
+            string userInputStr = getStringFromUser();
             analyzeString(userInputStr);
         }
-
-        private static string getStringFromUserAndAnalyze()
+        
+        // Getting a valid string from user
+        private static string getStringFromUser()
         {
-            const uint k_NumOfCharsInString = 10;
             System.Console.WriteLine("Please enter a numeric or an alphabetic string with the length of {0} characters:", k_NumOfCharsInString);
             string userInputStr = System.Console.ReadLine();
-            while (userInputStr.Length != k_NumOfCharsInString || !isValidString(userInputStr))
+            while (userInputStr.Length != k_NumOfCharsInString || !isAlphabeticOrNumericString(userInputStr))
             {
                 System.Console.WriteLine("Error: invalid string! {0}Please enter a numeric or an alphabetic string with the length of {1} characters:", System.Environment.NewLine, k_NumOfCharsInString);
                 userInputStr = System.Console.ReadLine();
@@ -29,47 +32,45 @@ namespace C17_Ex01_04
             return userInputStr;
         }
 
-        private static bool isValidString(string i_Str)
+        // Checks whether a string contains exclusively numeric or alphabetic characters but not both
+        private static bool isAlphabeticOrNumericString(string i_Str)
         {
-            bool v_IsValidString = true;
-            if (!IsAllLetters(i_Str) && !IsAllDigits(i_Str))
-            {
-                v_IsValidString = false;
-            }
-
-            return v_IsValidString;
+            return IsAllLetters(i_Str) || IsAllDigits(i_Str);
         }
 
+        // Checks whether a string contains only alphabetic characters
         public static bool IsAllLetters(string i_Str)
         {
-            bool v_IsAlphabeticString = true;
+            bool isAlphabeticString = true;
             foreach (char ch in i_Str)
             {
                 if (!char.IsLetter(ch))
                 {
-                    v_IsAlphabeticString = false;
+                    isAlphabeticString = false;
                     break;
                 }
             }
 
-            return v_IsAlphabeticString;
+            return isAlphabeticString;
         }
 
+        // Checks whether a string contains only numeric characters
         private static bool IsAllDigits(string i_Str)
         {
-            bool v_IsNumericString = true;
+            bool isNumericString = true;
             foreach (char ch in i_Str)
             {
                 if (!char.IsDigit(ch))
                 {
-                    v_IsNumericString = false;
+                    isNumericString = false;
                     break;
                 }
             }
 
-            return v_IsNumericString;
+            return isNumericString;
         }
-
+        
+        // Analyzes an input string and prints the analysis
         private static void analyzeString(string i_Str)
         {
             System.Console.WriteLine("===================={0}String Analysis:{0}====================", System.Environment.NewLine);
@@ -90,6 +91,7 @@ namespace C17_Ex01_04
             }
         }
 
+        // Counts the amount of capital letters in an alphabetic string
         private static uint countAmountOfCapitalLetters(string i_Str)
         {
             uint upperCaseCharsCounter = 0;
@@ -104,6 +106,7 @@ namespace C17_Ex01_04
             return upperCaseCharsCounter;
         }
 
+        // Calculates the digits average of numeric string
         private static float calculateDigitsAverage(string i_NumericStr)
         {
             uint digitsSum = 0;
@@ -116,6 +119,7 @@ namespace C17_Ex01_04
             return (float)digitsSum / i_NumericStr.Length;
         }
 
+        // Checks whether a string is a palindrome
         private static bool isPalindrome(string i_str)
         {
             uint leftIdx = 0;
