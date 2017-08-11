@@ -22,17 +22,17 @@ namespace C17_Ex01_03
         // Gets custom size of an hour-glass from user
         private static uint getCustomLengthOfHourGlass()
         {
-            uint o_customLength;
+            uint customLength;
             System.Console.WriteLine("Please insert the size of the hour glass:");
             string customLengthStr = System.Console.ReadLine();
 
-            while(!uint.TryParse(customLengthStr, out o_customLength))
+            while(!uint.TryParse(customLengthStr, out customLength))
             {
                 System.Console.WriteLine("Invalid Input!{0}Please insert the size of the hour glass:", System.Environment.NewLine);
                 customLengthStr = System.Console.ReadLine();
             }
 
-            return o_customLength;
+            return customLength;
         }
     }
 }
