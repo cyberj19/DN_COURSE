@@ -18,11 +18,11 @@ namespace C17_Ex01_04
         private static string getStringFromUserAndAnalyze()
         {
             const uint k_NumOfCharsInString = 10;
-            System.Console.WriteLine("Please enter a string with the length of {0} characters:", k_NumOfCharsInString);
+            System.Console.WriteLine("Please enter a numeric or an alphabetic string with the length of {0} characters:", k_NumOfCharsInString);
             string userInputStr = System.Console.ReadLine();
             while (userInputStr.Length != k_NumOfCharsInString || !isValidString(userInputStr))
             {
-                System.Console.WriteLine("Error: invalid string! {0}Please enter a string with the length of {1} characters:", System.Environment.NewLine, k_NumOfCharsInString);
+                System.Console.WriteLine("Error: invalid string! {0}Please enter a numeric or an alphabetic string with the length of {1} characters:", System.Environment.NewLine, k_NumOfCharsInString);
                 userInputStr = System.Console.ReadLine();
             }
 
@@ -72,14 +72,13 @@ namespace C17_Ex01_04
 
         private static void analyzeString(string i_Str)
         {
-            System.Console.WriteLine("String Analysis:");
+            System.Console.WriteLine("===================={0}String Analysis:{0}====================", System.Environment.NewLine);
             bool v_isPalindrome = isPalindrome(i_Str);
-            System.Console.WriteLine("Input string is " + (v_isPalindrome ? string.Empty : "not ") + "a Palindrome!");
-            int o_NumberFromString;
-            bool isNumeric = int.TryParse(i_Str, out o_NumberFromString);
+            System.Console.WriteLine("Input string is {0}a Palindrome!", v_isPalindrome ? string.Empty : "not ");
+            bool isNumeric = IsAllDigits(i_Str);
             if (isNumeric)
             {
-                float digitsAverage = calculateDigitsAverage(o_NumberFromString);                 // digits average
+                float digitsAverage = calculateDigitsAverage(i_Str);                 // digits average
 
                 System.Console.WriteLine("Input numeric string has a digit's average of {0}", digitsAverage);
             }
@@ -105,18 +104,16 @@ namespace C17_Ex01_04
             return upperCaseCharsCounter;
         }
 
-        private static float calculateDigitsAverage(int i_Number)
+        private static float calculateDigitsAverage(string i_NumericStr)
         {
-            uint digitsCounter = 0;
             uint digitsSum = 0;
 
-            for (; i_Number > 0; i_Number /= 10)
+            foreach (char digit in i_NumericStr)
             {
-                digitsCounter++;
-                digitsSum += (uint)i_Number % 10;
+                digitsSum += uint.Parse(digit.ToString());
             }
 
-            return (float)digitsSum / digitsCounter;
+            return (float)digitsSum / i_NumericStr.Length;
         }
 
         private static bool isPalindrome(string i_str)
