@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 
 namespace C17_Ex01_03
 {
@@ -9,7 +7,6 @@ namespace C17_Ex01_03
         static void Main(string[] args)
         {
             AnalyzeStringFromUser();
-
         }
 
         public static void AnalyzeStringFromUser()
@@ -18,7 +15,6 @@ namespace C17_Ex01_03
             analyzeString(userInputStr);
         }
 
-
         private static string getStringFromUserAndAnalyze()
         {
             const uint k_NumOfCharsInString = 10;
@@ -26,12 +22,12 @@ namespace C17_Ex01_03
             string userInputStr = System.Console.ReadLine();
             while (userInputStr.Length != k_NumOfCharsInString || !isValidString(userInputStr))
             {
-                System.Console.WriteLine("Error: invalid string! {0}Please enter a string with the length of {1} characters:", System.Environment.NewLine ,k_NumOfCharsInString);
+                System.Console.WriteLine("Error: invalid string! {0}Please enter a string with the length of {1} characters:", System.Environment.NewLine, k_NumOfCharsInString);
                 userInputStr = System.Console.ReadLine();
             }
+
             return userInputStr;
         }
-
 
         private static bool isValidString(string i_Str)
         {
@@ -40,22 +36,22 @@ namespace C17_Ex01_03
             {
                 v_IsValidString = false;
             }
+
             return v_IsValidString;
         }
-
-
 
         public static bool IsAllLetters(string i_Str)
         {
             bool v_IsAlphabeticString = true;
             foreach (char ch in i_Str)
             {
-                if (!Char.IsLetter(ch))
+                if (!char.IsLetter(ch))
                 {
                     v_IsAlphabeticString = false;
                     break;
                 }
             }
+
             return v_IsAlphabeticString;
         }
 
@@ -64,12 +60,13 @@ namespace C17_Ex01_03
             bool v_IsNumericString = true;
             foreach (char ch in i_Str)
             {
-                if (!Char.IsDigit(ch))
+                if (!char.IsDigit(ch))
                 {
                     v_IsNumericString = false;
                     break;
                 }
             }
+
             return v_IsNumericString;
         }
 
@@ -77,7 +74,7 @@ namespace C17_Ex01_03
         {
             System.Console.WriteLine("String Analysis:");
             bool v_isPalindrome = isPalindrome(i_Str);
-            System.Console.WriteLine("Input string is " + (v_isPalindrome?"":"not ") + "a Palindrome!");
+            System.Console.WriteLine("Input string is " + (v_isPalindrome ? string.Empty : "not ") + "a Palindrome!");
             int o_NumberFromString;
             bool isNumeric = int.TryParse(i_Str, out o_NumberFromString);
             if (isNumeric)
@@ -86,12 +83,11 @@ namespace C17_Ex01_03
 
                 System.Console.WriteLine("Input numeric string has a digit's average of {0}", digitsAverage);
             }
-            else // is not numeric
-            {
+            else
+            { // is not numeric
                 uint amountOfCapitalLetters = countAmountOfCapitalLetters(i_Str);                 // num of capital letters
 
                 System.Console.WriteLine("Input alphabetic string contains {0} capital letters", amountOfCapitalLetters);
-
             }
         }
 
@@ -100,11 +96,12 @@ namespace C17_Ex01_03
             uint upperCaseCharsCounter = 0;
             foreach (char ch in i_Str)
             {
-                if (Char.IsUpper(ch))
+                if (char.IsUpper(ch))
                 {
                     upperCaseCharsCounter++;
                 }
             }
+
             return upperCaseCharsCounter;
         }
         
@@ -118,10 +115,9 @@ namespace C17_Ex01_03
                 digitsCounter++;
                 digitsSum += (uint)number % 10;
             }
+
             return (float)digitsSum / digitsCounter;
         }
-
-
 
         private static bool isPalindrome(string i_str)
         {
@@ -136,13 +132,12 @@ namespace C17_Ex01_03
                     v_isPalindrome = false;
                     break;
                 }
+
                 rightIdx--;
                 leftIdx++;
             }
+
             return v_isPalindrome;
         }
-
-
-
     }
 }
