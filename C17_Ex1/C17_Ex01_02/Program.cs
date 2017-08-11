@@ -1,6 +1,6 @@
 ﻿namespace C17_Ex01_02
 {
-    class Program
+    public class Program
     {
         private const char k_HourGlassChar = '*';
         private const char k_SpaceChar = ' ';
