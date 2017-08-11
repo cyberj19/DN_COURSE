@@ -8,6 +8,10 @@ namespace C17_Ex01_05
         const uint k_AmountOfDigitsInNumber = 10;
         const char k_ZeroDigit = '0';
         const char k_NineDigit = '9';
+        static uint s_BiggestDigit = 9;
+        static uint s_SmallestDigit = 0;
+        static uint s_AmountOfDigitsBiggerThanUnitsDigit = 0;
+        static uint s_AmountOfDigitsSmallerThanUnitsDigit = 0;
 
         static void Main(string[] args)
         {
@@ -24,33 +28,30 @@ namespace C17_Ex01_05
         // Calculates numeric statistics for for an input number and prints the statistics
         private static void calculateAndPrintNumericStatistics(string inputNumberStr)
         {
-            printNumericStatistics(сalculateNumericStatistics(inputNumberStr));
+            сalculateNumericStatistics(inputNumberStr);
+            printNumericStatistics();
         }
 
         // Prints numeric statistics
-        private static void printNumericStatistics(NumericStatistics i_NumericStatistics)
+        private static void printNumericStatistics()
         {
             System.Console.WriteLine("==================={0}Numeric Statistics:{0}===================", System.Environment.NewLine);
             System.Console.WriteLine(
                 "The biggest digit is {1}{0}The smallest digit is {2}{0}The amount of digits bigger than units digit is {3}{0}The amount of digits smaller than units digit is {4}",
                 System.Environment.NewLine,
-                i_NumericStatistics.m_BiggestDigit,
-                i_NumericStatistics.m_SmallestDigit,
-                i_NumericStatistics.m_AmountOfDigitsBiggerThanUnitsDigit,
-                i_NumericStatistics.m_AmountOfDigitsSmallerThanUnitsDigit);
+               s_BiggestDigit,
+               s_SmallestDigit,
+               s_AmountOfDigitsBiggerThanUnitsDigit,
+               s_AmountOfDigitsSmallerThanUnitsDigit);
         }
 
         // Calculates numeric statistics
-        private static NumericStatistics сalculateNumericStatistics(string inputNumberStr)
+        private static void сalculateNumericStatistics(string inputNumberStr)
         {
-            NumericStatistics o_NumericStatistics;
-
-            o_NumericStatistics.m_BiggestDigit = getBiggestDigitInNumericString(inputNumberStr);
-            o_NumericStatistics.m_SmallestDigit = getSmallestDigitInNumericString(inputNumberStr);
-            o_NumericStatistics.m_AmountOfDigitsBiggerThanUnitsDigit = getAmountOfDigitsBiggerThanUnitsDigit(inputNumberStr);
-            o_NumericStatistics.m_AmountOfDigitsSmallerThanUnitsDigit = getAmountOfDigitsSmallerThanUnitsDigit(inputNumberStr);
-
-            return o_NumericStatistics;
+            s_BiggestDigit = getBiggestDigitInNumericString(inputNumberStr);
+            s_SmallestDigit = getSmallestDigitInNumericString(inputNumberStr);
+            s_AmountOfDigitsBiggerThanUnitsDigit = getAmountOfDigitsBiggerThanUnitsDigit(inputNumberStr);
+            s_AmountOfDigitsSmallerThanUnitsDigit = getAmountOfDigitsSmallerThanUnitsDigit(inputNumberStr);
         }
 
         // Counts the amount of digits that are smaller than the units digit
@@ -132,15 +133,6 @@ namespace C17_Ex01_05
             }
 
             return userInputStr;
-        }
-        
-        // a struct to hold the numeric statistics
-        struct NumericStatistics
-        {
-            public uint m_BiggestDigit;
-            public uint m_SmallestDigit;
-            public uint m_AmountOfDigitsBiggerThanUnitsDigit; 
-            public uint m_AmountOfDigitsSmallerThanUnitsDigit; 
         }
     }
 }
