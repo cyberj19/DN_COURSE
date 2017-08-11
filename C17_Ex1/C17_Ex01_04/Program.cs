@@ -2,7 +2,7 @@
 
 namespace C17_Ex01_04
 {
-    class Program
+    public class Program
     {
         const uint k_NumOfCharsInString = 10;
 
@@ -14,8 +14,7 @@ namespace C17_Ex01_04
         // Getting an input string from user and analyzes it
         public static void AnalyzeStringFromUser()
         {
-            string userInputStr = getStringFromUser();
-            analyzeStringAndPrint(userInputStr);
+            analyzeStringAndPrint(getStringFromUser());
         }
         
         // Getting a valid string from user
@@ -40,7 +39,7 @@ namespace C17_Ex01_04
         }
 
         // Checks whether a string contains only alphabetic characters
-        public static bool isAlphabeticString(string i_Str)
+        public static bool IsAlphabeticString(string i_Str)
         {
             bool isAlphabeticString = true;
 
@@ -57,7 +56,7 @@ namespace C17_Ex01_04
         }
 
         // Checks whether a string contains only numeric characters
-        private static bool isNumericString(string i_Str)
+        public static bool IsNumericString(string i_Str)
         {
             bool isNumericString = true;
 
@@ -76,13 +75,10 @@ namespace C17_Ex01_04
         // Analyzes an input string and prints the analysis
         private static void analyzeStringAndPrint(string i_Str)
         {
-            bool isPalindrome = isPalindromeString(i_Str);
-            bool isNumeric = isNumericString(i_Str);
-
             System.Console.WriteLine("===================={0}String Analysis:{0}====================", System.Environment.NewLine);
-            System.Console.WriteLine("Input string is {0}a Palindrome!", isPalindrome ? string.Empty : "not ");
+            System.Console.WriteLine("Input string is {0}a Palindrome!", isPalindromeString(i_Str) ? string.Empty : "not ");
 
-            if (isNumeric)
+            if (isNumericString(i_Str))
             {
                 System.Console.WriteLine("Input numeric string has a digit's average of {0}", calculateDigitsAverage(i_Str));
             }
