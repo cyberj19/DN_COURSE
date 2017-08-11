@@ -5,13 +5,13 @@ namespace C17_Ex01_05
 {
     class Program
     {
-        const uint k_AmountOfDigitsInNumber = 10;
-        const char k_ZeroDigit = '0';
-        const char k_NineDigit = '9';
-        static uint s_BiggestDigit = 9;
-        static uint s_SmallestDigit = 0;
-        static uint s_AmountOfDigitsBiggerThanUnitsDigit = 0;
-        static uint s_AmountOfDigitsSmallerThanUnitsDigit = 0;
+        private const uint k_AmountOfDigitsInNumber = 10;
+        private const char k_ZeroDigit = '0';
+        private const char k_NineDigit = '9';
+        private static uint s_BiggestDigit = 9;
+        private static uint s_SmallestDigit = 0;
+        private static uint s_AmountOfDigitsBiggerThanUnitsDigit = 0;
+        private static uint s_AmountOfDigitsSmallerThanUnitsDigit = 0;
 
         static void Main(string[] args)
         {

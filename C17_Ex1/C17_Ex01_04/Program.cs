@@ -4,7 +4,7 @@ namespace C17_Ex01_04
 {
     public class Program
     {
-        const uint k_NumOfCharsInString = 10;
+        private const uint k_NumOfCharsInString = 10;
 
         static void Main(string[] args)
         {
