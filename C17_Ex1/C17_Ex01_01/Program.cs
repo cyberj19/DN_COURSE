@@ -158,7 +158,7 @@
             string[] numbersReceivedAsBinStrArr = uintArrToBinaryStrArray(numbersReceived);
             uint amountAscendingNumbers;
             uint amountDescendingNumbers;
-            double numbersAvg = calcPositiveNumArrAvg(numbersReceived) / k_AmountNumbersToRecv; //todo: you have a bug here, you divide by the amount of numbers twice. (once inside the avg function and once outside) remove this redundant  " / k_AmountNumbersToRecv"
+            double numbersAvg = calcPositiveNumArrAvg(numbersReceived) / k_AmountNumbersToRecv; // todo: you have a bug here, you divide by the amount of numbers twice. (once inside the avg function and once outside) remove this redundant  " / k_AmountNumbersToRecv"
             double numbersBinaryDigitsAvg = calcStringArraySingleStrLengthAvg(numbersReceivedAsBinStrArr);
 
             getNumPositiveArrOrderInfo(numbersReceived, k_NumDigitsPerNum, out amountAscendingNumbers, out amountDescendingNumbers);
