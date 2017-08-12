@@ -41,7 +41,31 @@
         // converts a uint number to it's binary representation (string)
         private static string convertUIntToBinaryStr(uint i_Number)
         {
-            return System.Convert.ToString(i_Number, k_BinaryBase);
+            System.Text.StringBuilder binaryStrBuilder = new System.Text.StringBuilder();
+
+            if (0 == i_Number)
+            {
+                binaryStrBuilder.Append(k_ZeroChar);
+            }
+
+            while (i_Number > 0)
+            {
+                char charToAdd;
+
+                if ((i_Number % k_BinaryBase) == 0)
+                {
+                    charToAdd = k_ZeroChar;
+                }
+                else
+                {
+                    charToAdd = k_OneChar;
+                }
+
+                binaryStrBuilder.Insert(0, charToAdd);
+                i_Number /= k_BinaryBase;
+            }
+
+            return binaryStrBuilder.ToString();
         }
 
         // Checks whether the number's digits are in a certain order.
@@ -49,16 +73,17 @@
         // old digit to curr digit).
         private static bool isNumDigitsInOrder(bool i_IsAscRequired, int i_Num)
         {
-            bool isInOrder = i_Num != 0; // todo: why? not clear
-            int lastDigitChecked = i_Num % 10; // todo: this is probably the bug. you never update the last checked digit.
+            bool isInOrder = i_Num != 0; // todo: IS 0 in order? (mitkayem beofen rik?)
+            int lastDigitChecked = i_Num % 10;
 
             i_Num /= 10;
             while (isInOrder && (i_Num > 0))
             {
                 int currDigit = i_Num % 10;
-                i_Num /= 10;
 
+                i_Num /= 10;
                 isInOrder = (i_IsAscRequired && (currDigit < lastDigitChecked)) || (!i_IsAscRequired && (lastDigitChecked < currDigit));
+                lastDigitChecked = currDigit;
             }
 
             return isInOrder;
@@ -158,7 +183,7 @@
             string[] numbersReceivedAsBinStrArr = uintArrToBinaryStrArray(numbersReceived);
             uint amountAscendingNumbers;
             uint amountDescendingNumbers;
-            double numbersAvg = calcPositiveNumArrAvg(numbersReceived) / k_AmountNumbersToRecv; // todo: you have a bug here, you divide by the amount of numbers twice. (once inside the avg function and once outside) remove this redundant  " / k_AmountNumbersToRecv"
+            double numbersAvg = calcPositiveNumArrAvg(numbersReceived);
             double numbersBinaryDigitsAvg = calcStringArraySingleStrLengthAvg(numbersReceivedAsBinStrArr);
 
             getNumPositiveArrOrderInfo(numbersReceived, k_NumDigitsPerNum, out amountAscendingNumbers, out amountDescendingNumbers);

@@ -15,7 +15,7 @@ namespace C17_Ex01_05
         }
 
         // Gets a number from user and calculates it's statistics
-        public static void GetNumberAndCalculateStatistics()
+        public static void GetNumberAndCalculateStatistics() //todo: Why is this public? Make it private!
         {
             string inputNumberStr = getInputNumberFromUser();
 
@@ -23,7 +23,7 @@ namespace C17_Ex01_05
         }
 
         // Calculates numeric statistics for for an input number and prints the statistics
-        private static void calculateAndPrintNumericStatistics(string inputNumberStr)
+        private static void calculateAndPrintNumericStatistics(string inputNumberStr) //todo: Look again over functions in this file. this and the next no prefix "i_"
         {
             System.Console.WriteLine(buildNumericStatisticsString(сalculateNumericStatistics(inputNumberStr)));
         }
@@ -32,7 +32,7 @@ namespace C17_Ex01_05
         private static string buildNumericStatisticsString(string[] numericStatisticsValues)
         {
             System.Text.StringBuilder numericStatisticsStrBuilder = new System.Text.StringBuilder();
-
+            //todo: looks really weird and hard to read. Mybe use some indentation or write in otherway?
             numericStatisticsStrBuilder.Append(
  @"===================
 Numeric Statistics:
@@ -71,8 +71,8 @@ The amount of digits smaller than the units digit is {3}",
             char unitsDigit = inputNumberStr[inputNumberStr.Length - 1];
 
             foreach (char digit in inputNumberStr)
-            {
-                if ((digit > unitsDigit && i_IsBigger) || (digit < unitsDigit && !i_IsBigger))
+            { //todo: Please add () around the digit and units digit comparasion
+                if ((digit > unitsDigit && i_IsBigger) || (digit < unitsDigit && !i_IsBigger)) //todo: Read //todo below for "IsBiggest"
                 {
                     amountOfDigitsComparedToUnitsDigitCounter++;
                 }
@@ -104,7 +104,7 @@ The amount of digits smaller than the units digit is {3}",
 
             foreach (char digit in i_NumericStr)
             {
-                if (((digit > mostDigit) && i_IsBiggest) || ((digit < mostDigit) && !i_IsBiggest))
+                if (((digit > mostDigit) && i_IsBiggest) || ((digit < mostDigit) && !i_IsBiggest)) //todo: Change i_IsBiggest to i_IsBiggestOperation :)
                 {
                     mostDigit = digit;
                 }
@@ -134,7 +134,7 @@ The amount of digits smaller than the units digit is {3}",
         {
             string userInputStr = string.Empty;
 
-            while ((userInputStr.Length != k_AmountOfDigitsInNumber) || !StringAnalysis.IsNumericString(userInputStr))
+            while ((userInputStr.Length != k_AmountOfDigitsInNumber) || !StringAnalysis.IsNumericString(userInputStr)) //Please state why IsNumericString is public in the code file
             {
                 System.Console.WriteLine("Please enter a number with the length of {0} digits:", k_AmountOfDigitsInNumber);
                 userInputStr = System.Console.ReadLine();

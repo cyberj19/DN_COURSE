@@ -6,11 +6,11 @@
 
         static void Main(string[] args)
         {
-            AnalyzeStringFromUser();
+            AnalyzeStringFromUser(); //todo: Not a good name. It also prints and does everything..... add Print to it's name.
         }
 
         // Getting an input string from user and analyzes it
-        public static void AnalyzeStringFromUser()
+        public static void AnalyzeStringFromUser() //todo: why is this public????????????????? todo2: Added for 5? State it please.
         {
             analyzeStringAndPrint(getStringFromUser());
         }
@@ -108,7 +108,7 @@
         // Checks whether a string is a palindrome
         private static bool isPalindromeString(string i_Str)
         {
-            bool isPalindrome = true;
+            bool isPalindrome = true; //todo: SPACE line required...
             for (int i = 0; (i < (i_Str.Length / 2)) && isPalindrome; i++)
             {
                 isPalindrome = i_Str[i] == i_Str[i_Str.Length - 1 - i];

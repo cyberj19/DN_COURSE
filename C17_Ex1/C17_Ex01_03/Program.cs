@@ -1,5 +1,4 @@
-﻿using SimpleHourGlass = C17_Ex01_02.Program; /*// todo: Delete all using. he didnt teach this and he wants our program free of these lines as stated.
-// todo: Instead using C17_Ex01_02.Program.Something when calling the class*/
+﻿using SimpleHourGlass = C17_Ex01_02.Program; 
 
 namespace C17_Ex01_03
 {
@@ -26,9 +25,9 @@ namespace C17_Ex01_03
             uint customLength;
             string customLengthStr = string.Empty;
 
-            while(!uint.TryParse(customLengthStr, out customLength))
+            while(!uint.TryParse(customLengthStr, out customLength)) //todo: Perhaps add "....".Length == 0, so we wont run TryParse at the first time for no reason
             {
-                System.Console.WriteLine("Please insert the size of the hour glass:");
+                System.Console.WriteLine("Please insert the size of the hour glass:"); //todo: Dont know man. Mybe should notify about errors? dont know if neccesary (i mean different str for first time and other times)
                 customLengthStr = System.Console.ReadLine();
             }
 
