@@ -29,36 +29,37 @@ namespace C17_Ex01_05
         }
 
         // Prints numeric statistics
-        private static string buildNumericStatisticsString(uint[] numericStatistics)
+        private static string buildNumericStatisticsString(string[] numericStatisticsValues)
         {
             System.Text.StringBuilder numericStatisticsStrBuilder = new System.Text.StringBuilder();
 
-            numericStatisticsStrBuilder.AppendFormat("==================={0}Numeric Statistics:{0}===================", System.Environment.NewLine);
+            numericStatisticsStrBuilder.Append(
+ @"===================
+Numeric Statistics:
+===================");
 
             // todo: not sure if the usage of StringBuilder here is optimal (probably not) also, I wanted to give the array as attribute list but it didn't worked out for me yet
-            numericStatisticsStrBuilder.AppendFormat(
-                @"
+            string numericStatistics = string.Format(
+@"
 The biggest digit is {0}
 The smallest digit is {1}
-The amount of digits bigger than units digit is {2}
-The amount of digits smaller than units digit is {3}",
-                numericStatistics[0],
-                numericStatistics[1],
-                numericStatistics[2],
-                numericStatistics[3]);
+The amount of digits bigger than the units digit is {2}
+The amount of digits smaller than the units digit is {3}",
+                numericStatisticsValues);
+            numericStatisticsStrBuilder.Append(numericStatistics);
 
             return numericStatisticsStrBuilder.ToString();
         }
 
         // Calculates numeric statistics
-        private static uint[] сalculateNumericStatistics(string inputNumberStr)
+        private static string[] сalculateNumericStatistics(string inputNumberStr)
         {
-            uint[] numericStatistics = new uint[k_NumberOfStatistics];
+            string[] numericStatistics = new string[k_NumberOfStatistics];
 
-            numericStatistics[0] = getBiggestDigitInNumericString(inputNumberStr); // todo:  I don't really like this explicit usage of int[] members
-            numericStatistics[1] = getSmallestDigitInNumericString(inputNumberStr);
-            numericStatistics[2] = getAmountOfDigitsBiggerThanUnitsDigit(inputNumberStr);
-            numericStatistics[3] = getAmountOfDigitsSmallerThanUnitsDigit(inputNumberStr);
+            numericStatistics[0] = getBiggestDigitInNumericString(inputNumberStr).ToString(); // todo:  I don't really like this explicit usage of string[] \ uint[] members
+            numericStatistics[1] = getSmallestDigitInNumericString(inputNumberStr).ToString();
+            numericStatistics[2] = getAmountOfDigitsBiggerThanUnitsDigit(inputNumberStr).ToString();
+            numericStatistics[3] = getAmountOfDigitsSmallerThanUnitsDigit(inputNumberStr).ToString();
 
             return numericStatistics;
         }
