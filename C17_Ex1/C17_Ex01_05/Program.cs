@@ -1,18 +1,13 @@
-﻿using System;
-using StringAnalysis = C17_Ex01_04.Program;
+﻿using StringAnalysis = C17_Ex01_04.Program;
 
 namespace C17_Ex01_05
 {
     class Program
     {
         private const uint k_AmountOfDigitsInNumber = 10;
+        private const uint k_NumberOfStatistics = 4;
         private const char k_ZeroDigit = '0';
         private const char k_NineDigit = '9';
-        //todo: Why using static? IT's usually a really bad thing. if u can return these variables then do that
-        private static uint s_BiggestDigit = 9;
-        private static uint s_SmallestDigit = 0;
-        private static uint s_AmountOfDigitsBiggerThanUnitsDigit = 0;
-        private static uint s_AmountOfDigitsSmallerThanUnitsDigit = 0;
 
         static void Main(string[] args)
         {
@@ -22,40 +17,39 @@ namespace C17_Ex01_05
         // Gets a number from user and calculates it's statistics
         public static void GetNumberAndCalculateStatistics()
         {
-            //todo: Missing space between the next 2 lines
             string inputNumberStr = getInputNumberFromUser();
+
             calculateAndPrintNumericStatistics(inputNumberStr);
         }
 
         // Calculates numeric statistics for for an input number and prints the statistics
         private static void calculateAndPrintNumericStatistics(string inputNumberStr)
         {
-            сalculateNumericStatistics(inputNumberStr);
-            printNumericStatistics();
+            System.Console.WriteLine(buildNumericStatisticsString(сalculateNumericStatistics(inputNumberStr)));
         }
 
         // Prints numeric statistics
-        private static void printNumericStatistics()
+        private static string buildNumericStatisticsString(uint[] numericStatistics)
         {
-            //todo: Perhaps using String builder instead
-            System.Console.WriteLine("==================={0}Numeric Statistics:{0}===================", System.Environment.NewLine);
-            System.Console.WriteLine(
-                "The biggest digit is {1}{0}The smallest digit is {2}{0}The amount of digits bigger than units digit is {3}{0}The amount of digits smaller than units digit is {4}",
-                System.Environment.NewLine,
-               s_BiggestDigit,
-               s_SmallestDigit,
-               s_AmountOfDigitsBiggerThanUnitsDigit,
-               s_AmountOfDigitsSmallerThanUnitsDigit);
+            System.Text.StringBuilder numericStatisticsStrBuilder = new System.Text.StringBuilder();
+
+            numericStatisticsStrBuilder.AppendFormat("==================={0}Numeric Statistics:{0}===================", System.Environment.NewLine);
+            numericStatisticsStrBuilder.AppendFormat("The biggest digit is {1}{0}The smallest digit is {2}{0}The amount of digits bigger than units digit is {3}{0}The amount of digits smaller than units digit is {4}", System.Environment.NewLine, numericStatistics);
+
+            return numericStatisticsStrBuilder.ToString();
         }
 
         // Calculates numeric statistics
-        private static void сalculateNumericStatistics(string inputNumberStr)
+        private static uint[] сalculateNumericStatistics(string inputNumberStr)
         {
-            //todo: Why not return instead
-            s_BiggestDigit = getBiggestDigitInNumericString(inputNumberStr);
-            s_SmallestDigit = getSmallestDigitInNumericString(inputNumberStr);
-            s_AmountOfDigitsBiggerThanUnitsDigit = getAmountOfDigitsBiggerThanUnitsDigit(inputNumberStr);
-            s_AmountOfDigitsSmallerThanUnitsDigit = getAmountOfDigitsSmallerThanUnitsDigit(inputNumberStr);
+            uint[] numericStatistics = new uint[k_NumberOfStatistics];
+
+            numericStatistics[0] = getBiggestDigitInNumericString(inputNumberStr);
+            numericStatistics[1] = getSmallestDigitInNumericString(inputNumberStr);
+            numericStatistics[2] = getAmountOfDigitsBiggerThanUnitsDigit(inputNumberStr);
+            numericStatistics[3] = getAmountOfDigitsSmallerThanUnitsDigit(inputNumberStr);
+
+            return numericStatistics;
         }
 
         // Counts the amount of digits that are smaller than the units digit
@@ -121,20 +115,17 @@ namespace C17_Ex01_05
                 }
             }
 
-            //todo: Did not verify code yet, but make sure its always a int-str or this might throw an exception
-            return uint.Parse(minDigit.ToString());
+            return uint.Parse(minDigit.ToString());  // todo: Did not verify code yet, but make sure its always a int-str or this might throw an exception
         }
 
         // Gets a numeric string from user
         private static string getInputNumberFromUser()
         {
-            //todo: Dont use write line before declearing variables. Also same mistake as others, use Readline once not twice
-            System.Console.WriteLine("Please enter a number with the length of {0} digits:", k_AmountOfDigitsInNumber);
-            string userInputStr = System.Console.ReadLine();
+            string userInputStr = string.Empty;
 
-            while (userInputStr.Length != k_AmountOfDigitsInNumber || !StringAnalysis.IsNumericString(userInputStr))
+            while ((userInputStr.Length != k_AmountOfDigitsInNumber) || !StringAnalysis.IsNumericString(userInputStr))
             {
-                System.Console.WriteLine("Error: invalid input! {0}Please enter a number with the length of {1} digits:", System.Environment.NewLine, k_AmountOfDigitsInNumber);
+                System.Console.WriteLine("Please enter a number with the length of {0} digits:", k_AmountOfDigitsInNumber);
                 userInputStr = System.Console.ReadLine();
             }
 
