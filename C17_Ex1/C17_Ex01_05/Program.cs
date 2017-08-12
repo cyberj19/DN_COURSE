@@ -34,7 +34,16 @@ namespace C17_Ex01_05
             System.Text.StringBuilder numericStatisticsStrBuilder = new System.Text.StringBuilder();
 
             numericStatisticsStrBuilder.AppendFormat("==================={0}Numeric Statistics:{0}===================", System.Environment.NewLine);
-            numericStatisticsStrBuilder.AppendFormat("{0}The biggest digit is {1}{0}The smallest digit is {2}{0}The amount of digits bigger than units digit is {3}{0}The amount of digits smaller than units digit is {4}", System.Environment.NewLine, numericStatistics[0], numericStatistics[1], numericStatistics[2], numericStatistics[3]);
+            numericStatisticsStrBuilder.AppendFormat(
+                @"
+The biggest digit is {0}
+The smallest digit is {1}
+The amount of digits bigger than units digit is {2}
+The amount of digits smaller than units digit is {3}",
+                numericStatistics[0],
+                numericStatistics[1],
+                numericStatistics[2],
+                numericStatistics[3]);
             //todo: not sure if the usage of StringBuilder here is optimal (probably not) also, I wanted to give the array as attribute list but it didn't worked out for me yet
 
             return numericStatisticsStrBuilder.ToString();
