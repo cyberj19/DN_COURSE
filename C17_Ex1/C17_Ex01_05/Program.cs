@@ -11,11 +11,11 @@ namespace C17_Ex01_05
 
         static void Main(string[] args)
         {
-            GetNumberAndCalculateStatistics();
+            getNumberAndCalculateAndPrintStatistics();
         }
 
-        // Gets a number from user and calculates it's statistics
-        public static void GetNumberAndCalculateStatistics() //todo: Why is this public? Make it private!
+        // Gets a number from user, calculates it's statistics then prints the statistics
+        private static void getNumberAndCalculateAndPrintStatistics() 
         {
             string inputNumberStr = getInputNumberFromUser();
 
@@ -23,13 +23,15 @@ namespace C17_Ex01_05
         }
 
         // Calculates numeric statistics for for an input number and prints the statistics
-        private static void calculateAndPrintNumericStatistics(string inputNumberStr) //todo: Look again over functions in this file. this and the next no prefix "i_"
+        private static void calculateAndPrintNumericStatistics(string i_InputNumberStr) //todo: Look again over functions in this file. this and the next no prefix "i_"
         {
-            System.Console.WriteLine(buildNumericStatisticsString(сalculateNumericStatistics(inputNumberStr)));
+            System.Console.WriteLine(
+                buildNumericStatisticsString(
+                    сalculateNumericStatistics(i_InputNumberStr)));
         }
 
         // Prints numeric statistics
-        private static string buildNumericStatisticsString(string[] numericStatisticsValues)
+        private static string buildNumericStatisticsString(string[] i_NumericStatisticsValues)
         {
             System.Text.StringBuilder numericStatisticsStrBuilder = new System.Text.StringBuilder();
             //todo: looks really weird and hard to read. Mybe use some indentation or write in otherway?
@@ -45,34 +47,34 @@ The biggest digit is {0}
 The smallest digit is {1}
 The amount of digits bigger than the units digit is {2}
 The amount of digits smaller than the units digit is {3}",
-                numericStatisticsValues);
+                i_NumericStatisticsValues);
             numericStatisticsStrBuilder.Append(numericStatistics);
 
             return numericStatisticsStrBuilder.ToString();
         }
 
         // Calculates numeric statistics
-        private static string[] сalculateNumericStatistics(string inputNumberStr)
+        private static string[] сalculateNumericStatistics(string i_InputNumberStr)
         {
             string[] numericStatistics = new string[k_NumberOfStatistics];
 
-            numericStatistics[0] = getBiggestDigitInNumericString(inputNumberStr).ToString(); // todo:  I don't really like this explicit usage of string[] \ uint[] members
-            numericStatistics[1] = getSmallestDigitInNumericString(inputNumberStr).ToString();
-            numericStatistics[2] = getAmountOfDigitsBiggerThanUnitsDigit(inputNumberStr).ToString();
-            numericStatistics[3] = getAmountOfDigitsSmallerThanUnitsDigit(inputNumberStr).ToString();
+            numericStatistics[0] = getBiggestDigitInNumericString(i_InputNumberStr).ToString(); // todo:  I don't really like this explicit usage of string[] \ uint[] members
+            numericStatistics[1] = getSmallestDigitInNumericString(i_InputNumberStr).ToString();
+            numericStatistics[2] = getAmountOfDigitsBiggerThanUnitsDigit(i_InputNumberStr).ToString();
+            numericStatistics[3] = getAmountOfDigitsSmallerThanUnitsDigit(i_InputNumberStr).ToString();
 
             return numericStatistics;
         }
 
         // Counts the amount of digits that are bigger or smaller than the units digit (depends on i_IsBigger boolean parameter)
-        private static uint getAmountOfDigitsComparedToUnitsDigit(string inputNumberStr, bool i_IsBigger)
+        private static uint getAmountOfDigitsComparedToUnitsDigit(string i_InputNumberStr, bool i_IsBiggerOperation)
         {
             uint amountOfDigitsComparedToUnitsDigitCounter = 0;
-            char unitsDigit = inputNumberStr[inputNumberStr.Length - 1];
+            char unitsDigit = i_InputNumberStr[i_InputNumberStr.Length - 1];
 
-            foreach (char digit in inputNumberStr)
-            { //todo: Please add () around the digit and units digit comparasion
-                if ((digit > unitsDigit && i_IsBigger) || (digit < unitsDigit && !i_IsBigger)) //todo: Read //todo below for "IsBiggest"
+            foreach (char digit in i_InputNumberStr)
+            { 
+                if (((digit > unitsDigit) && i_IsBiggerOperation) || ((digit < unitsDigit) && !i_IsBiggerOperation)) //todo: Read //todo below for "IsBiggest"
                 {
                     amountOfDigitsComparedToUnitsDigitCounter++;
                 }
@@ -82,35 +84,35 @@ The amount of digits smaller than the units digit is {3}",
         }
 
         // Counts the amount of digits that are smaller than the units digit
-        private static uint getAmountOfDigitsSmallerThanUnitsDigit(string inputNumberStr)
+        private static uint getAmountOfDigitsSmallerThanUnitsDigit(string i_InputNumberStr)
         {
-            const bool v_IsBigger = true;
+            const bool v_IsBiggerOperation = true;
 
-            return getAmountOfDigitsComparedToUnitsDigit(inputNumberStr, !v_IsBigger);
+            return getAmountOfDigitsComparedToUnitsDigit(i_InputNumberStr, !v_IsBiggerOperation);
         }
 
         // Counts the amount of digits that are bigger than the units digit
-        private static uint getAmountOfDigitsBiggerThanUnitsDigit(string inputNumberStr)
+        private static uint getAmountOfDigitsBiggerThanUnitsDigit(string i_InputNumberStr)
         {
-            const bool v_IsBigger = true;
+            const bool v_IsBiggerOperation = true;
 
-            return getAmountOfDigitsComparedToUnitsDigit(inputNumberStr, v_IsBigger);
+            return getAmountOfDigitsComparedToUnitsDigit(i_InputNumberStr, v_IsBiggerOperation);
         }
 
         // Gets the biggest or smallest digit (depends on i_IsBiggest) in a numeric string
-        private static uint getMostDigitInNumericString(string i_NumericStr, bool i_IsBiggest)
+        private static uint getMostDigitInNumericString(string i_NumericStr, bool i_IsBiggestOperation)
         {
-            char mostDigit = i_IsBiggest ? k_ZeroDigit : k_NineDigit;
+            char mostDigit = i_IsBiggestOperation ? k_ZeroDigit : k_NineDigit;
 
             foreach (char digit in i_NumericStr)
             {
-                if (((digit > mostDigit) && i_IsBiggest) || ((digit < mostDigit) && !i_IsBiggest)) //todo: Change i_IsBiggest to i_IsBiggestOperation :)
+                if (((digit > mostDigit) && i_IsBiggestOperation) || ((digit < mostDigit) && !i_IsBiggestOperation))
                 {
                     mostDigit = digit;
                 }
             }
 
-            return uint.Parse(mostDigit.ToString());  // todo: Did not verify code yet, but make sure its always a int-str or this might throw an exception
+            return uint.Parse(mostDigit.ToString());  // We assume that 'i_NumericStr' is always a int-str, so that 'mostDigit' will always be parsed successfully
         }
 
         // Gets the biggest digit in a numeric string
@@ -134,7 +136,7 @@ The amount of digits smaller than the units digit is {3}",
         {
             string userInputStr = string.Empty;
 
-            while ((userInputStr.Length != k_AmountOfDigitsInNumber) || !StringAnalysis.IsNumericString(userInputStr)) //Please state why IsNumericString is public in the code file
+            while ((userInputStr.Length != k_AmountOfDigitsInNumber) || !StringAnalysis.IsNumericString(userInputStr))
             {
                 System.Console.WriteLine("Please enter a number with the length of {0} digits:", k_AmountOfDigitsInNumber);
                 userInputStr = System.Console.ReadLine();

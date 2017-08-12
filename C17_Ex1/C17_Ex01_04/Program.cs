@@ -6,11 +6,11 @@
 
         static void Main(string[] args)
         {
-            AnalyzeStringFromUser(); //todo: Not a good name. It also prints and does everything..... add Print to it's name.
+            analyzeAndPrintStringFromUser();
         }
 
         // Getting an input string from user and analyzes it
-        public static void AnalyzeStringFromUser() //todo: why is this public????????????????? todo2: Added for 5? State it please.
+        private static void analyzeAndPrintStringFromUser() 
         {
             analyzeStringAndPrint(getStringFromUser());
         }
@@ -32,11 +32,11 @@
         // Checks whether a string contains exclusively numeric or alphabetic characters but not both (not alphanumric!)
         private static bool isAlphabeticOrNumericString(string i_Str)
         {
-            return IsAlphabeticString(i_Str) || IsNumericString(i_Str);
+            return isAlphabeticString(i_Str) || IsNumericString(i_Str);
         }
 
         // Checks whether a string contains only alphabetic characters
-        public static bool IsAlphabeticString(string i_Str)
+        private static bool isAlphabeticString(string i_Str) 
         {
             bool isAlphabeticString = true;
 
@@ -49,7 +49,8 @@
         }
 
         // Checks whether a string contains only numeric characters
-        public static bool IsNumericString(string i_Str)
+        // it is public so we can use it in C17_Ex01_05.Program
+        public static bool IsNumericString(string i_Str) 
         {
             bool isNumericString = true;
 
