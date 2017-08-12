@@ -1,5 +1,5 @@
-﻿using SimpleHourGlass = C17_Ex01_02.Program; // todo: Delete all using. he didnt teach this and he wants our program free of these lines as stated.
-// todo: Instead using C17_Ex01_02.Program.Something when calling the class
+﻿using SimpleHourGlass = C17_Ex01_02.Program; /*// todo: Delete all using. he didnt teach this and he wants our program free of these lines as stated.
+// todo: Instead using C17_Ex01_02.Program.Something when calling the class*/
 
 namespace C17_Ex01_03
 {
