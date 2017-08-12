@@ -49,8 +49,8 @@
         // old digit to curr digit).
         private static bool isNumDigitsInOrder(bool i_IsAscRequired, int i_Num)
         {
-            bool isInOrder = i_Num != 0;
-            int lastDigitChecked = i_Num % 10;
+            bool isInOrder = i_Num != 0; // todo: why? not clear
+            int lastDigitChecked = i_Num % 10; // todo: this is probably the bug. you never update the last checked digit.
 
             i_Num /= 10;
             while (isInOrder && (i_Num > 0))
