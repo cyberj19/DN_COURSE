@@ -112,13 +112,19 @@
             return sum / i_NumArr.Length;
         }
 
-        private static void getNumPositiveArrOrderInfo(uint[] i_Arr, out uint o_AmountAscendingNumbers, out uint o_AmountDescendingNumbers)
+        private static void getNumPositiveArrOrderInfo(uint[] i_Arr, uint i_MaxNumDigits, out uint o_AmountAscendingNumbers, out uint o_AmountDescendingNumbers)
         {
             uint amountAscendingNumbers = 0;
             uint amountDescendingNumbers = 0;
 
             for (int i = 0; i < i_Arr.Length; i++)
             {
+                // If max number of digits is 4, then every number below 100 cannot be ascending/desending (starts with 2 zeroes or more)
+                if ((i_MaxNumDigits > 2) && (i_Arr[i] < System.Math.Pow(10, i_MaxNumDigits - 2)))
+                {
+                    continue;
+                }
+
                 if (isAscendingDigits((int)i_Arr[i]))
                 {
                     amountAscendingNumbers++;
@@ -155,7 +161,7 @@
             double numbersAvg = calcPositiveNumArrAvg(numbersReceived) / k_AmountNumbersToRecv;
             double numbersBinaryDigitsAvg = calcStringArraySingleStrLengthAvg(numbersReceivedAsBinStrArr);
 
-            getNumPositiveArrOrderInfo(numbersReceived, out amountAscendingNumbers, out amountDescendingNumbers);
+            getNumPositiveArrOrderInfo(numbersReceived, k_NumDigitsPerNum, out amountAscendingNumbers, out amountDescendingNumbers);
             System.Console.WriteLine("Numbers binary format:");
             printStrArr(numbersReceivedAsBinStrArr);
             System.Console.WriteLine(

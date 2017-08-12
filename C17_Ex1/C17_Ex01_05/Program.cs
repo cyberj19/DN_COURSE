@@ -8,6 +8,7 @@ namespace C17_Ex01_05
         private const uint k_AmountOfDigitsInNumber = 10;
         private const char k_ZeroDigit = '0';
         private const char k_NineDigit = '9';
+        //todo: Why using static? IT's usually a really bad thing. if u can return these variables then do that
         private static uint s_BiggestDigit = 9;
         private static uint s_SmallestDigit = 0;
         private static uint s_AmountOfDigitsBiggerThanUnitsDigit = 0;
@@ -21,6 +22,7 @@ namespace C17_Ex01_05
         // Gets a number from user and calculates it's statistics
         public static void GetNumberAndCalculateStatistics()
         {
+            //todo: Missing space between the next 2 lines
             string inputNumberStr = getInputNumberFromUser();
             calculateAndPrintNumericStatistics(inputNumberStr);
         }
@@ -35,6 +37,7 @@ namespace C17_Ex01_05
         // Prints numeric statistics
         private static void printNumericStatistics()
         {
+            //todo: Perhaps using String builder instead
             System.Console.WriteLine("==================={0}Numeric Statistics:{0}===================", System.Environment.NewLine);
             System.Console.WriteLine(
                 "The biggest digit is {1}{0}The smallest digit is {2}{0}The amount of digits bigger than units digit is {3}{0}The amount of digits smaller than units digit is {4}",
@@ -48,6 +51,7 @@ namespace C17_Ex01_05
         // Calculates numeric statistics
         private static void сalculateNumericStatistics(string inputNumberStr)
         {
+            //todo: Why not return instead
             s_BiggestDigit = getBiggestDigitInNumericString(inputNumberStr);
             s_SmallestDigit = getSmallestDigitInNumericString(inputNumberStr);
             s_AmountOfDigitsBiggerThanUnitsDigit = getAmountOfDigitsBiggerThanUnitsDigit(inputNumberStr);
@@ -117,12 +121,14 @@ namespace C17_Ex01_05
                 }
             }
 
+            //todo: Did not verify code yet, but make sure its always a int-str or this might throw an exception
             return uint.Parse(minDigit.ToString());
         }
 
         // Gets a numeric string from user
         private static string getInputNumberFromUser()
         {
+            //todo: Dont use write line before declearing variables. Also same mistake as others, use Readline once not twice
             System.Console.WriteLine("Please enter a number with the length of {0} digits:", k_AmountOfDigitsInNumber);
             string userInputStr = System.Console.ReadLine();
 
