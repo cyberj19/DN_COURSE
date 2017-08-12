@@ -34,7 +34,8 @@ namespace C17_Ex01_05
             System.Text.StringBuilder numericStatisticsStrBuilder = new System.Text.StringBuilder();
 
             numericStatisticsStrBuilder.AppendFormat("==================={0}Numeric Statistics:{0}===================", System.Environment.NewLine);
-            numericStatisticsStrBuilder.AppendFormat("The biggest digit is {1}{0}The smallest digit is {2}{0}The amount of digits bigger than units digit is {3}{0}The amount of digits smaller than units digit is {4}", System.Environment.NewLine, numericStatistics);
+            numericStatisticsStrBuilder.AppendFormat("{0}The biggest digit is {1}{0}The smallest digit is {2}{0}The amount of digits bigger than units digit is {3}{0}The amount of digits smaller than units digit is {4}", System.Environment.NewLine, numericStatistics[0], numericStatistics[1], numericStatistics[2], numericStatistics[3]);
+            //todo: not sure if the usage of StringBuilder here is optimal (probably not) also, I wanted to give the array as attribute list but it didn't worked out for me yet
 
             return numericStatisticsStrBuilder.ToString();
         }
@@ -44,7 +45,7 @@ namespace C17_Ex01_05
         {
             uint[] numericStatistics = new uint[k_NumberOfStatistics];
 
-            numericStatistics[0] = getBiggestDigitInNumericString(inputNumberStr);
+            numericStatistics[0] = getBiggestDigitInNumericString(inputNumberStr); //todo:  I don't really like this explicit usage of int[] members
             numericStatistics[1] = getSmallestDigitInNumericString(inputNumberStr);
             numericStatistics[2] = getAmountOfDigitsBiggerThanUnitsDigit(inputNumberStr);
             numericStatistics[3] = getAmountOfDigitsSmallerThanUnitsDigit(inputNumberStr);
@@ -86,36 +87,36 @@ namespace C17_Ex01_05
             return amountOfDigitsBiggerThanUnitsDigitCounter;
         }
 
-        // Gets the biggest digit in a numeric string
-        private static uint getBiggestDigitInNumericString(string i_NumericStr)
+        // Gets the biggest or smallest digit (depends on i_IsBiggest) in a numeric string
+        private static uint getMostDigitInNumericString(string i_NumericStr, bool i_IsBiggest)
         {
-            char maxDigit = k_ZeroDigit;
+            char mostDigit = i_IsBiggest ? k_ZeroDigit : k_NineDigit;
 
             foreach (char digit in i_NumericStr)
             {
-                if (digit > maxDigit)
+                if (((digit > mostDigit) && i_IsBiggest) || ((digit < mostDigit) && !i_IsBiggest))
                 {
-                    maxDigit = digit;
+                    mostDigit = digit;
                 }
             }
 
-            return uint.Parse(maxDigit.ToString());
+            return uint.Parse(mostDigit.ToString());  // todo: Did not verify code yet, but make sure its always a int-str or this might throw an exception
+        }
+
+        // Gets the biggest digit in a numeric string
+        private static uint getBiggestDigitInNumericString(string i_NumericStr)
+        {
+            const bool v_IsBiggest = true;
+
+            return getMostDigitInNumericString(i_NumericStr, v_IsBiggest);
         }
 
         // Gets the smallest digit in a numeric string
         private static uint getSmallestDigitInNumericString(string i_NumericStr)
         {
-            char minDigit = k_NineDigit;
+            const bool v_IsBiggest = true;
 
-            foreach (char digit in i_NumericStr)
-            {
-                if (digit < minDigit)
-                {
-                    minDigit = digit;
-                }
-            }
-
-            return uint.Parse(minDigit.ToString());  // todo: Did not verify code yet, but make sure its always a int-str or this might throw an exception
+            return getMostDigitInNumericString(i_NumericStr, !v_IsBiggest);
         }
 
         // Gets a numeric string from user
