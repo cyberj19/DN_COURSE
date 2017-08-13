@@ -56,14 +56,14 @@ The amount of digits smaller than the units digit is {3}",
         // Calculates numeric statistics
         private static string[] сalculateNumericStatistics(string i_InputNumberStr)
         {
-            string[] numericStatistics = new string[k_NumberOfStatistics];
+            string[] numericStatisticsStrings = new string[k_NumberOfStatistics];
 
-            numericStatistics[0] = getBiggestDigitInNumericString(i_InputNumberStr).ToString(); // todo:  I don't really like this explicit usage of string[] \ uint[] members
-            numericStatistics[1] = getSmallestDigitInNumericString(i_InputNumberStr).ToString();
-            numericStatistics[2] = getAmountOfDigitsBiggerThanUnitsDigit(i_InputNumberStr).ToString();
-            numericStatistics[3] = getAmountOfDigitsSmallerThanUnitsDigit(i_InputNumberStr).ToString();
+            numericStatisticsStrings[0] = getBiggestDigitInNumericString(i_InputNumberStr).ToString(); // todo:  I don't really like this explicit usage of string[] \ uint[] members
+            numericStatisticsStrings[1] = getSmallestDigitInNumericString(i_InputNumberStr).ToString();
+            numericStatisticsStrings[2] = getAmountOfDigitsBiggerThanUnitsDigit(i_InputNumberStr).ToString();
+            numericStatisticsStrings[3] = getAmountOfDigitsSmallerThanUnitsDigit(i_InputNumberStr).ToString();
 
-            return numericStatistics;
+            return numericStatisticsStrings;
         }
 
         // Counts the amount of digits that are bigger or smaller than the units digit (depends on i_IsBigger boolean parameter)
@@ -135,12 +135,19 @@ The amount of digits smaller than the units digit is {3}",
         private static string getInputNumberFromUser()
         {
             string userInputStr = string.Empty;
+            bool isValidInput;
 
-            while ((userInputStr.Length != k_AmountOfDigitsInNumber) || !StringAnalysis.IsNumericString(userInputStr))
+            System.Console.WriteLine("Please enter a number with the length of {0} digits:", k_AmountOfDigitsInNumber);
+            do
             {
-                System.Console.WriteLine("Please enter a number with the length of {0} digits:", k_AmountOfDigitsInNumber);
                 userInputStr = System.Console.ReadLine();
+                isValidInput = (userInputStr.Length == k_AmountOfDigitsInNumber) && StringAnalysis.IsNumericString(userInputStr);
+                if (!isValidInput)
+                {
+                    System.Console.WriteLine("Invalid input! Please try again:");
+                }
             }
+            while (!isValidInput);
 
             return userInputStr;
         }

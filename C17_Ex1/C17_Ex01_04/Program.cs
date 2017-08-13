@@ -18,15 +18,22 @@
         // Getting a valid string from user
         private static string getStringFromUser()
         {
-            string userInputStr = string.Empty;
+            string userInput = string.Empty;
+            bool isValidInput;
 
-            while ((userInputStr.Length != k_NumOfCharsInString) || !isAlphabeticOrNumericString(userInputStr))
+            System.Console.WriteLine("Please enter a numeric or an alphabetic string with the length of {0} characters:", k_NumOfCharsInString);
+            do
             {
-                System.Console.WriteLine("Please enter a numeric or an alphabetic string with the length of {0} characters:", k_NumOfCharsInString);
-                userInputStr = System.Console.ReadLine();
+                userInput = System.Console.ReadLine();
+                isValidInput = (userInput.Length == k_NumOfCharsInString) && isAlphabeticOrNumericString(userInput);
+                if (!isValidInput)
+                {
+                    System.Console.WriteLine("Invalid input! Please try again:");
+                }
             }
-
-            return userInputStr;
+            while (!isValidInput);
+     
+            return userInput;
         }
 
         // Checks whether a string contains exclusively numeric or alphabetic characters but not both (not alphanumric!)
@@ -109,7 +116,8 @@
         // Checks whether a string is a palindrome
         private static bool isPalindromeString(string i_Str)
         {
-            bool isPalindrome = true; //todo: SPACE line required...
+            bool isPalindrome = true;
+
             for (int i = 0; (i < (i_Str.Length / 2)) && isPalindrome; i++)
             {
                 isPalindrome = i_Str[i] == i_Str[i_Str.Length - 1 - i];

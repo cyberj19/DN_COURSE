@@ -24,12 +24,19 @@ namespace C17_Ex01_03
         {
             uint customLength;
             string customLengthStr = string.Empty;
+            bool isValidInput;
 
-            while(!uint.TryParse(customLengthStr, out customLength)) //todo: Perhaps add "....".Length == 0, so we wont run TryParse at the first time for no reason
+            System.Console.WriteLine("Please insert the size of the hour glass:");
+            do
             {
-                System.Console.WriteLine("Please insert the size of the hour glass:"); //todo: Dont know man. Mybe should notify about errors? dont know if neccesary (i mean different str for first time and other times)
                 customLengthStr = System.Console.ReadLine();
+                isValidInput = uint.TryParse(customLengthStr, out customLength);
+                if (!isValidInput)
+                {
+                    System.Console.WriteLine("Invalid input! Please try again:");
+                }
             }
+            while (!isValidInput);
 
             return customLength;
         }
