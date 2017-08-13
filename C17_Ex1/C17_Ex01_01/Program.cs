@@ -52,7 +52,14 @@
             {
                 char charToAdd;
 
-                charToAdd = (i_Number % k_BinaryBase) == 0 ? k_ZeroChar : k_OneChar;
+                if ((i_Number % k_BinaryBase) == 0)
+                {
+                    charToAdd = k_ZeroChar;
+                }
+                else
+                {
+                    charToAdd = k_OneChar;
+                }
 
                 binaryStrBuilder.Insert(0, charToAdd);
                 i_Number /= k_BinaryBase;
@@ -141,18 +148,25 @@
 
             for (int i = 0; i < i_Arr.Length; i++)
             {
+                bool isAboveTwoDigits = i_MaxNumDigits > 2;
+                bool isLessThanMaxNumberWithoutTwoDigit = i_Arr[i] < System.Math.Pow(10, i_MaxNumDigits - 2);
+                bool isLessThanMaxNumberWithoutOneDigits = i_Arr[i] < System.Math.Pow(10, i_MaxNumDigits - 1);
+                bool shouldCheckForDescendingDigits = !(isLessThanMaxNumberWithoutOneDigits && isAboveTwoDigits);
+                
                 // If max number of digits is 4, then every number below 100 cannot be ascending/desending (starts with 2 zeroes or more)
-                if ((i_MaxNumDigits > 2) && (i_Arr[i] < System.Math.Pow(10, i_MaxNumDigits - 2)))
+                if (isAboveTwoDigits && isLessThanMaxNumberWithoutTwoDigit)
                 {
                     continue;
                 }
-
+                
                 if (isAscendingDigits((int)i_Arr[i]))
                 {
                     amountAscendingNumbers++;
                 }
-                else if (isDescendingDigits((int)i_Arr[i]))
+                else if (shouldCheckForDescendingDigits && isDescendingDigits((int)i_Arr[i]))
                 {
+                    // About 'shouldCheckForDescendingDigits' : if max number is 9999, 0999 Cannot be a descending number!. 
+                    // 3210 would be the last descending number, but our current problem is the '0' at the beginning.
                     amountDescendingNumbers++;
                 }
             }
