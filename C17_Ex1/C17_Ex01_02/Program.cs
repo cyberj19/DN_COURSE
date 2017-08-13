@@ -13,14 +13,16 @@
             printLengthFiveHourGlass();
         }
 
+        // Prints an hour glass with the length of five
         private static void printLengthFiveHourGlass()
         {
             string hourGlassStr = GenerateHourGlassStr(k_HourGlassSize, k_HourGlassChar);
 
-            System.Console.WriteLine(hourGlassStr);
+            System.Console.Write(hourGlassStr);
         }
 
-        // todo:..... Generate vs generate. decide if public or private
+        // Generates an hour glass drawing string
+        // it is public so we can use it in C17_Ex01_03.Program
         public static string GenerateHourGlassStr(uint i_Size, char i_HourGlassChar)
         {
             uint usedSizeForHourglass = i_Size;
@@ -49,6 +51,7 @@
             return hourGlassStrBuilder.ToString();
         }
 
+        // Generates a single line of the hour glass
         private static System.Text.StringBuilder generateHourGlassLine(uint i_NumAsterisks, uint i_LineSize, char i_HourGlassChar)
         {
             System.Text.StringBuilder lineStrBuilder = new System.Text.StringBuilder();

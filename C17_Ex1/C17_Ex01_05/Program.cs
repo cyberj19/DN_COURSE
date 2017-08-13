@@ -5,7 +5,7 @@ namespace C17_Ex01_05
     class Program
     {
         private const uint k_AmountOfDigitsInNumber = 10;
-        private const uint k_NumberOfStatistics = 4;
+        private const uint k_NumberOfSections = 4;
         private const char k_ZeroDigit = '0';
         private const char k_NineDigit = '9';
 
@@ -23,32 +23,26 @@ namespace C17_Ex01_05
         }
 
         // Calculates numeric statistics for for an input number and prints the statistics
-        private static void calculateAndPrintNumericStatistics(string i_InputNumberStr) //todo: Look again over functions in this file. this and the next no prefix "i_"
+        private static void calculateAndPrintNumericStatistics(string i_InputNumberStr)
         {
-            System.Console.WriteLine(
-                buildNumericStatisticsString(
-                    сalculateNumericStatistics(i_InputNumberStr)));
+            string[] numericStatisticsValues = сalculateNumericStatistics(i_InputNumberStr);
+            string numericStatisticsReportStr = buildNumericStatisticsReportString(numericStatisticsValues);
+
+            System.Console.WriteLine(numericStatisticsReportStr);
         }
 
         // Prints numeric statistics
-        private static string buildNumericStatisticsString(string[] i_NumericStatisticsValues)
+        private static string buildNumericStatisticsReportString(string[] i_NumericStatisticsValues)
         {
             System.Text.StringBuilder numericStatisticsStrBuilder = new System.Text.StringBuilder();
-            //todo: looks really weird and hard to read. Mybe use some indentation or write in otherway?
-            numericStatisticsStrBuilder.Append(
- @"===================
-Numeric Statistics:
-===================");
 
-            // todo: not sure if the usage of StringBuilder here is optimal (probably not) also, I wanted to give the array as attribute list but it didn't worked out for me yet
-            string numericStatistics = string.Format(
-@"
-The biggest digit is {0}
-The smallest digit is {1}
-The amount of digits bigger than the units digit is {2}
-The amount of digits smaller than the units digit is {3}",
-                i_NumericStatisticsValues);
-            numericStatisticsStrBuilder.Append(numericStatistics);
+            numericStatisticsStrBuilder.AppendFormat("==================={0}", System.Environment.NewLine);
+            numericStatisticsStrBuilder.AppendFormat("Numeric Statistics:{0}", System.Environment.NewLine);
+            numericStatisticsStrBuilder.AppendFormat("==================={0}", System.Environment.NewLine);
+            numericStatisticsStrBuilder.AppendFormat("The biggest digit is {1}{0}", System.Environment.NewLine, i_NumericStatisticsValues[0]);
+            numericStatisticsStrBuilder.AppendFormat("The smallest digit is {1}{0}", System.Environment.NewLine, i_NumericStatisticsValues[1]);
+            numericStatisticsStrBuilder.AppendFormat("The amount of digits bigger than the units digit is {1}{0}", System.Environment.NewLine, i_NumericStatisticsValues[2]);
+            numericStatisticsStrBuilder.AppendFormat("The amount of digits smaller than the units digit is {1}{0}", System.Environment.NewLine, i_NumericStatisticsValues[3]);
 
             return numericStatisticsStrBuilder.ToString();
         }
@@ -56,14 +50,14 @@ The amount of digits smaller than the units digit is {3}",
         // Calculates numeric statistics
         private static string[] сalculateNumericStatistics(string i_InputNumberStr)
         {
-            string[] numericStatisticsStrings = new string[k_NumberOfStatistics];
+            string[] NumericStatisticsSections = new string[k_NumberOfSections];
 
-            numericStatisticsStrings[0] = getBiggestDigitInNumericString(i_InputNumberStr).ToString(); // todo:  I don't really like this explicit usage of string[] \ uint[] members
-            numericStatisticsStrings[1] = getSmallestDigitInNumericString(i_InputNumberStr).ToString();
-            numericStatisticsStrings[2] = getAmountOfDigitsBiggerThanUnitsDigit(i_InputNumberStr).ToString();
-            numericStatisticsStrings[3] = getAmountOfDigitsSmallerThanUnitsDigit(i_InputNumberStr).ToString();
+            NumericStatisticsSections[0] = getBiggestDigitInNumericString(i_InputNumberStr).ToString();
+            NumericStatisticsSections[1] = getSmallestDigitInNumericString(i_InputNumberStr).ToString();
+            NumericStatisticsSections[2] = getAmountOfDigitsBiggerThanUnitsDigit(i_InputNumberStr).ToString();
+            NumericStatisticsSections[3] = getAmountOfDigitsSmallerThanUnitsDigit(i_InputNumberStr).ToString();
 
-            return numericStatisticsStrings;
+            return NumericStatisticsSections;
         }
 
         // Counts the amount of digits that are bigger or smaller than the units digit (depends on i_IsBigger boolean parameter)
@@ -74,7 +68,7 @@ The amount of digits smaller than the units digit is {3}",
 
             foreach (char digit in i_InputNumberStr)
             { 
-                if (((digit > unitsDigit) && i_IsBiggerOperation) || ((digit < unitsDigit) && !i_IsBiggerOperation)) //todo: Read //todo below for "IsBiggest"
+                if (((digit > unitsDigit) && i_IsBiggerOperation) || ((digit < unitsDigit) && !i_IsBiggerOperation))
                 {
                     amountOfDigitsComparedToUnitsDigitCounter++;
                 }
@@ -100,6 +94,7 @@ The amount of digits smaller than the units digit is {3}",
         }
 
         // Gets the biggest or smallest digit (depends on i_IsBiggest) in a numeric string
+        // We assume that 'i_NumericStr' is always a int-str, so that 'mostDigit' will always be parsed successfully
         private static uint getMostDigitInNumericString(string i_NumericStr, bool i_IsBiggestOperation)
         {
             char mostDigit = i_IsBiggestOperation ? k_ZeroDigit : k_NineDigit;
@@ -112,7 +107,7 @@ The amount of digits smaller than the units digit is {3}",
                 }
             }
 
-            return uint.Parse(mostDigit.ToString());  // We assume that 'i_NumericStr' is always a int-str, so that 'mostDigit' will always be parsed successfully
+            return uint.Parse(mostDigit.ToString());
         }
 
         // Gets the biggest digit in a numeric string

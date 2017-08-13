@@ -47,7 +47,7 @@
         {
             bool isAlphabeticString = true;
 
-            for(int i = 0; (i < i_Str.Length) && isAlphabeticString; i++)
+            for (int i = 0; (i < i_Str.Length) && isAlphabeticString; i++)
             {
                 isAlphabeticString = char.IsLetter(i_Str[i]);
             }

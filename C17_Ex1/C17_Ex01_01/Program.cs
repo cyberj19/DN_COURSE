@@ -13,7 +13,7 @@
             getNumbersFromUserAndPrintBinaryInformation();
         }
 
-        // recv positive integer number from the user. In case of bad numbers, will ask for numbers again.
+        // Receive positive integer number from the user. In case of bad numbers, will ask for numbers again.
         private static uint[] recvPositiveIntegerNumbersFromUser(uint i_AmountOfNumbersToRecv, uint i_NumDigitsPerNum)
         {
             uint[] numbersReceivedArr = new uint[i_AmountOfNumbersToRecv];
@@ -38,12 +38,12 @@
             return numbersReceivedArr;
         }
         
-        // converts a uint number to it's binary representation (string)
+        // Converts a uint number to it's binary representation (string)
         private static string convertUIntToBinaryStr(uint i_Number)
         {
             System.Text.StringBuilder binaryStrBuilder = new System.Text.StringBuilder();
 
-            if (0 == i_Number)
+            if (i_Number == 0)
             {
                 binaryStrBuilder.Append(k_ZeroChar);
             }
@@ -52,14 +52,7 @@
             {
                 char charToAdd;
 
-                if ((i_Number % k_BinaryBase) == 0)
-                {
-                    charToAdd = k_ZeroChar;
-                }
-                else
-                {
-                    charToAdd = k_OneChar;
-                }
+                charToAdd = (i_Number % k_BinaryBase) == 0 ? k_ZeroChar : k_OneChar;
 
                 binaryStrBuilder.Insert(0, charToAdd);
                 i_Number /= k_BinaryBase;
@@ -89,7 +82,7 @@
             return isInOrder;
         }
 
-        // checks whether the number's digits are in ascending order
+        // Checks whether the number's digits are in ascending order
         private static bool isAscendingDigits(int i_Num)
         {
             const bool v_IsAscendingOrder = true;
@@ -97,7 +90,7 @@
             return isNumDigitsInOrder(v_IsAscendingOrder, i_Num);
         }
 
-        // checks whether the number's digits are in descending order
+        // Checks whether the number's digits are in descending order
         private static bool isDescendingDigits(int i_Num)
         {
             const bool v_IsAscendingOrder = true;
@@ -105,6 +98,7 @@
             return isNumDigitsInOrder(!v_IsAscendingOrder, i_Num);
         }
         
+        // Converts a uint array to a Binary string array
         private static string[] uintArrToBinaryStrArray(uint[] i_NumArr)
         {
             string[] binArr = new string[i_NumArr.Length];
@@ -117,6 +111,7 @@
             return binArr;
         }
 
+        // Prints string array
         private static void printStrArr(string[] i_ArrToPrint)
         {
             for (int i = 0; i < i_ArrToPrint.Length; i++)
@@ -125,6 +120,7 @@
             }
         }
 
+        // Calculates average from a positive numbers array
         private static double calcPositiveNumArrAvg(uint[] i_NumArr)
         {
             double sum = 0.0;
@@ -137,6 +133,7 @@
             return sum / i_NumArr.Length;
         }
 
+        // Get information about order in an array (Amount of ascending and descending)
         private static void getNumPositiveArrOrderInfo(uint[] i_Arr, uint i_MaxNumDigits, out uint o_AmountAscendingNumbers, out uint o_AmountDescendingNumbers)
         {
             uint amountAscendingNumbers = 0;
@@ -164,7 +161,8 @@
             o_AmountDescendingNumbers = amountDescendingNumbers;
         }
 
-        private static double calcStringArraySingleStrLengthAvg(string[] i_StrArr)
+        // Calculates the average of strings length
+        private static double calcAvgStringLengthInArray(string[] i_StrArr)
         {
             double lengthSum = 0.0;
 
@@ -176,7 +174,7 @@
             return lengthSum / i_StrArr.Length; 
         }
 
-        // get 'k_AmountNumbersToRecv' amount of numbers from the user, and print status information about the group of numbers.
+        // Gets 'k_AmountNumbersToRecv' amount of numbers from the user, and prints status information about the group of numbers
         private static void getNumbersFromUserAndPrintBinaryInformation()
         {
             uint[] numbersReceived = recvPositiveIntegerNumbersFromUser(k_AmountNumbersToRecv, k_NumDigitsPerNum);
@@ -184,7 +182,7 @@
             uint amountAscendingNumbers;
             uint amountDescendingNumbers;
             double numbersAvg = calcPositiveNumArrAvg(numbersReceived);
-            double numbersBinaryDigitsAvg = calcStringArraySingleStrLengthAvg(numbersReceivedAsBinStrArr);
+            double numbersBinaryDigitsAvg = calcAvgStringLengthInArray(numbersReceivedAsBinStrArr);
 
             getNumPositiveArrOrderInfo(numbersReceived, k_NumDigitsPerNum, out amountAscendingNumbers, out amountDescendingNumbers);
             System.Console.WriteLine("Numbers binary format:");

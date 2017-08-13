@@ -14,9 +14,10 @@ namespace C17_Ex01_03
         // Prints an hour-glass by custom size it gets from user input 
         private static void getCustomLengthAndPrintHourGlass()
         {
-            string hourGlassStr = SimpleHourGlass.GenerateHourGlassStr(getCustomLengthOfHourGlass(), k_HourGlassChar);
+            uint requiredCustomLength = getCustomLengthOfHourGlass();
+            string hourGlassStr = SimpleHourGlass.GenerateHourGlassStr(requiredCustomLength, k_HourGlassChar);
 
-            System.Console.WriteLine(hourGlassStr);
+            System.Console.Write(hourGlassStr);
         }
 
         // Gets custom size of an hour-glass from user
