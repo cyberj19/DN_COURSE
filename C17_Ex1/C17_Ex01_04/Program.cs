@@ -2,6 +2,13 @@
 {
     public class Program
     {
+        // public because it is being used by C17_Ex01_05.Program
+        public enum eStringType
+        {
+            Numeric,
+            Alphabetic,
+        }
+
         private const uint k_NumOfCharsInString = 10;
 
         static void Main(string[] args)
@@ -39,49 +46,52 @@
         // Checks whether a string contains exclusively numeric or alphabetic characters but not both (not alphanumric!)
         private static bool isAlphabeticOrNumericString(string i_Str)
         {
-            return isAlphabeticString(i_Str) || IsNumericString(i_Str);
+            return IsStringType(i_Str, eStringType.Alphabetic) || IsStringType(i_Str, eStringType.Numeric);
         }
 
-        // Checks whether a string contains only alphabetic characters
-        private static bool isAlphabeticString(string i_Str) 
-        {
-            bool isAlphabeticString = true;
-
-            for (int i = 0; (i < i_Str.Length) && isAlphabeticString; i++)
-            {
-                isAlphabeticString = char.IsLetter(i_Str[i]);
-            }
-
-            return isAlphabeticString;
-        }
-
-        // Checks whether a string contains only numeric characters
+        // Checks whether a string is of a certain type.
         // it is public so we can use it in C17_Ex01_05.Program
-        public static bool IsNumericString(string i_Str) 
+        public static bool IsStringType(string i_Str, eStringType i_StringType)
         {
-            bool isNumericString = true;
+            const bool v_IsValidType = true;
+            bool IsStringType = true;
 
-            for (int i = 0; (i < i_Str.Length) && isNumericString; i++)
+            for (int i = 0; (i < i_Str.Length) && IsStringType; i++)
             {
-                isNumericString = char.IsDigit(i_Str[i]);
+                switch (i_StringType)
+                {
+                    case eStringType.Numeric:
+                        IsStringType = char.IsDigit(i_Str[i]);
+                        break;
+                    case eStringType.Alphabetic:
+                        IsStringType = char.IsLetter(i_Str[i]);
+                        break;
+                    default:
+                        IsStringType = !v_IsValidType;
+                        break;
+                }
             }
 
-            return isNumericString;
-        }
-        
+            return IsStringType;
+        }        
+
         // Analyzes an input string and prints the analysis
         private static void analyzeStringAndPrint(string i_Str)
         {
+            string strTypeRelatedAnalysis;
+
             System.Console.WriteLine("===================={0}String Analysis:{0}====================", System.Environment.NewLine);
             System.Console.WriteLine("Input string is {0}a Palindrome!", isPalindromeString(i_Str) ? string.Empty : "not ");
-            if (IsNumericString(i_Str))
+            if (IsStringType(i_Str, eStringType.Numeric))
             {
-                System.Console.WriteLine("Input numeric string has a digit's average of {0}", calculateDigitsAverage(i_Str));
+                strTypeRelatedAnalysis = string.Format("Input numeric string has a digit's average of {0}", calculateDigitsAverage(i_Str));
             }
             else
             {
-                System.Console.WriteLine("Input alphabetic string contains {0} capital letters", countAmountOfCapitalLetters(i_Str));
+                strTypeRelatedAnalysis = string.Format("Input alphabetic string contains {0} capital letters", countAmountOfCapitalLetters(i_Str));
             }
+
+            System.Console.WriteLine(strTypeRelatedAnalysis);
         }
 
         // Counts the amount of capital letters in an alphabetic string

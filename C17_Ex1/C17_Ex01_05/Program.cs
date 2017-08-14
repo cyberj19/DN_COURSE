@@ -136,7 +136,7 @@ namespace C17_Ex01_05
             do
             {
                 userInputStr = System.Console.ReadLine();
-                isValidInput = (userInputStr.Length == k_AmountOfDigitsInNumber) && StringAnalysis.IsNumericString(userInputStr);
+                isValidInput = (userInputStr.Length == k_AmountOfDigitsInNumber) && StringAnalysis.IsStringType(userInputStr, StringAnalysis.eStringType.Numeric);
                 if (!isValidInput)
                 {
                     System.Console.WriteLine("Invalid input! Please try again:");

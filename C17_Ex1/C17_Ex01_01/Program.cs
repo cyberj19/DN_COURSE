@@ -1,7 +1,13 @@
 ﻿namespace C17_Ex01_01
 {
     class Program
-    {        
+    {
+        private enum eOrderType
+        {
+            Ascending,
+            Descending,
+        }
+
         private const uint k_AmountNumbersToRecv = 4;
         private const uint k_NumDigitsPerNum = 4;
         private const int k_BinaryBase = 2;
@@ -71,9 +77,10 @@
         // Checks whether the number's digits are in a certain order.
         // will check from right to left instead of left to right (So Asc and Desc will be the opposite of what they are suppose to be when comparing
         // old digit to curr digit).
-        private static bool isNumDigitsInOrder(bool i_IsAscRequired, int i_Num)
+        private static bool isNumDigitsInOrder(eOrderType i_OrderType, int i_Num)
         {
-            bool isInOrder = i_Num != 0; // todo: IS 0 in order? (mitkayem beofen rik?)
+            const bool v_IsValidOrderType = true;
+            bool isInOrder = i_Num != 0; 
             int lastDigitChecked = i_Num % 10;
 
             i_Num /= 10;
@@ -82,7 +89,19 @@
                 int currDigit = i_Num % 10;
 
                 i_Num /= 10;
-                isInOrder = (i_IsAscRequired && (currDigit < lastDigitChecked)) || (!i_IsAscRequired && (lastDigitChecked < currDigit));
+                switch (i_OrderType)
+                {
+                    case eOrderType.Ascending:
+                        isInOrder = currDigit < lastDigitChecked;
+                        break;
+                    case eOrderType.Descending:
+                        isInOrder = lastDigitChecked < currDigit;
+                        break;
+                    default:
+                        isInOrder = !v_IsValidOrderType;
+                        break;
+                }
+
                 lastDigitChecked = currDigit;
             }
 
@@ -92,17 +111,13 @@
         // Checks whether the number's digits are in ascending order
         private static bool isAscendingDigits(int i_Num)
         {
-            const bool v_IsAscendingOrder = true;
-
-            return isNumDigitsInOrder(v_IsAscendingOrder, i_Num);
+            return isNumDigitsInOrder(eOrderType.Ascending, i_Num);
         }
 
         // Checks whether the number's digits are in descending order
         private static bool isDescendingDigits(int i_Num)
         {
-            const bool v_IsAscendingOrder = true;
-
-            return isNumDigitsInOrder(!v_IsAscendingOrder, i_Num);
+            return isNumDigitsInOrder(eOrderType.Descending, i_Num);
         }
         
         // Converts a uint array to a Binary string array
