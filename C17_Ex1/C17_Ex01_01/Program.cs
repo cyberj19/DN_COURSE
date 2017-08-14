@@ -19,7 +19,7 @@
             uint[] numbersReceivedArr = new uint[i_AmountOfNumbersToRecv];
             uint numSuccessfulParsedNumbers = 0;
 
-            System.Console.WriteLine("Please Insert {0} Positive Integer Numbers With {1} Digits:", i_AmountOfNumbersToRecv, i_NumDigitsPerNum);
+            System.Console.WriteLine("Please insert {0} positive integer numbers with {1} digits:", i_AmountOfNumbersToRecv, i_NumDigitsPerNum);
             while (numSuccessfulParsedNumbers < i_AmountOfNumbersToRecv)
             {
                 string currRawUserInput = System.Console.ReadLine();
@@ -27,7 +27,7 @@
 
                 if ((!uint.TryParse(currRawUserInput, out currUserInputParsed)) || (i_NumDigitsPerNum != (uint)currRawUserInput.Length))
                 {
-                    System.Console.WriteLine("Bad input Received. Please insert again:");
+                    System.Console.WriteLine("Bad input received. Please insert again:");
                     continue;
                 }
 

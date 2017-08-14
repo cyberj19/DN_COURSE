@@ -132,7 +132,7 @@ namespace C17_Ex01_05
             string userInputStr = string.Empty;
             bool isValidInput;
 
-            System.Console.WriteLine("Please enter a number with the length of {0} digits:", k_AmountOfDigitsInNumber);
+            System.Console.WriteLine("Please enter a natural number with the length of {0} digits:", k_AmountOfDigitsInNumber);
             do
             {
                 userInputStr = System.Console.ReadLine();
