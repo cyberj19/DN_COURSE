@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex02.BasicDataTypes
+namespace C17_Ex02.Game.Player
 {
-    struct Point
+    class HumanPlayer
     {
     }
 }

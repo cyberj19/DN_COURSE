@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex02
+namespace C17_Ex02.Game
 {
-    class Match
+    class GameBoardCell
     {
     }
 }

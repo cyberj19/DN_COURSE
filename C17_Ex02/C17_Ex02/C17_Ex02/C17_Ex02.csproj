@@ -4,12 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DAEA5CC8-47ED-44FB-8DEB-3AFE3EC25B47}</ProjectGuid>
+    <ProjectGuid>{89C53FF9-F2B3-4D45-A797-7C63DA500457}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Ex02</RootNamespace>
-    <AssemblyName>Ex02</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>C17_Ex02</RootNamespace>
+    <AssemblyName>C17_Ex02</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,12 +35,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Ex02.ConsoleUtils">
-      <HintPath>..\..\..\..\..\..\..\Temp\Ex02.ConsoleUtils.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="BasicDataTypes\Board.cs" />
+    <Compile Include="BasicDataTypes\Point.cs" />
+    <Compile Include="Game\GameBoard.cs" />
+    <Compile Include="Game\GameBoardCell.cs" />
+    <Compile Include="Game\Player\ComputerPlayer.cs" />
+    <Compile Include="Game\Player\HumanPlayer.cs" />
+    <Compile Include="Generators\RangeGenerator.cs" />
+    <Compile Include="Generators\TwoDimensionalArrayGenerator.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
