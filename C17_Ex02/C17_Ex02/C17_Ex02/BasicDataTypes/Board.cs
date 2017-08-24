@@ -8,6 +8,11 @@ namespace C17_Ex02.BasicDataTypes
 {
     class Board<T>
     {
+        private const int k_FirstItemInRowIndex = 0;
+        private const int k_OneItemRight = 1;
+        private const int k_OneItemRightAfterEachRowIteration = 1;
+        private const int k_OneItemLeft = -1;
+        private const int k_OneItemLeftAfterEachRowIteration = -1;
         private T[,] m_Cells;
         private readonly uint m_NumRows;
         private readonly uint m_NumCols;
@@ -28,9 +33,9 @@ namespace C17_Ex02.BasicDataTypes
             }
         }
 
-
         public Board(uint i_NumRows, uint i_NumCols)
         {
+            //todo: Max Rows/Cols? atleast not empty. Right diago function needs last item..
             m_NumRows = i_NumRows;
             m_NumCols = i_NumCols;
             m_Cells = new T[i_NumRows, i_NumCols];
@@ -66,5 +71,44 @@ namespace C17_Ex02.BasicDataTypes
 
             return new TwoDimensionalArrayGenerator<T>(outerGenerator, innerGenerator, m_Cells);
         }
+
+        public TwoDimensionalArrayGenerator<T> GetColGenerator(uint i_Column)
+        {
+            //todo: Check irow out of bounds or wait for exception to be thrown later?
+            //todo: Same thing with x and y. if Y stays first there's no problem with the outer
+            RangeGenerator outerGenerator = new RangeGenerator((int)m_NumRows);
+            RangeGenerator innerGenerator = new RangeGenerator((int)i_Column, (int)i_Column + 1);
+
+            return new TwoDimensionalArrayGenerator<T>(outerGenerator, innerGenerator, m_Cells);
+        }
+
+        public TwoDimensionalArrayGenerator<T> GetLeftDiagonalGenerator()
+        {
+            RangeGenerator outerGenerator = new RangeGenerator((int)m_NumRows);
+            RangeGenerator innerGenerator = new RangeGenerator(
+                k_FirstItemInRowIndex,
+                k_FirstItemInRowIndex + k_OneItemRight,
+                k_OneItemRight,
+                k_OneItemRightAfterEachRowIteration,
+                k_OneItemRightAfterEachRowIteration);
+
+            return new TwoDimensionalArrayGenerator<T>(outerGenerator, innerGenerator, m_Cells);
+        }
+
+        public TwoDimensionalArrayGenerator<T> GetRightDiagonalGenerator()
+        {
+            int lastItemInRowIndex = (int)m_NumCols;
+            RangeGenerator outerGenerator = new RangeGenerator((int)m_NumRows);
+            RangeGenerator innerGenerator = new RangeGenerator(
+                lastItemInRowIndex,
+                lastItemInRowIndex + k_OneItemLeft,
+                k_OneItemLeft,
+                k_OneItemLeftAfterEachRowIteration,
+                k_OneItemLeftAfterEachRowIteration);
+
+            return new TwoDimensionalArrayGenerator<T>(outerGenerator, innerGenerator, m_Cells);
+        }
+
     }
 }
+//todo: add style cop conf to main sln consider deleting proj conf

@@ -37,13 +37,15 @@
   <ItemGroup>
     <Compile Include="BasicDataTypes\Board.cs" />
     <Compile Include="BasicDataTypes\Point.cs" />
-    <Compile Include="Game\GameBoard.cs" />
     <Compile Include="Game\GameBoardCell.cs" />
+    <Compile Include="Game\GameLogic.cs" />
+    <Compile Include="Game\GameManager.cs" />
     <Compile Include="Game\Player\ComputerPlayer.cs" />
     <Compile Include="Game\Player\HumanPlayer.cs" />
     <Compile Include="Generators\RangeGenerator.cs" />
     <Compile Include="Generators\TwoDimensionalArrayGenerator.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ReversedTicTacToe.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,7 +15,7 @@ namespace C17_Ex02.Generators
         private int m_StartIndex = 0;
         private int m_EndIndex = 0;
         private int m_CurrIndex = 0;
-
+        //todo: make function tht all share
         public RangeGenerator(int i_StartIndex, int i_EndIndex, int i_AdditionAfterEachIteration, int i_StartAdditionAfterEachReset, int i_EndAdditionAfterEachReset)
         {
             m_StartIndex = i_StartIndex;
