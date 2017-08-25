@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using C17_Ex02.BasicDataTypes;
+using C17_Ex02.Generators;
 
 namespace C17_Ex02.Game.Player
 {
@@ -11,7 +12,22 @@ namespace C17_Ex02.Game.Player
     {
         static public Point? MakeMove(Board<GameBoardCell> i_Board, GameBoardCell.eType i_CellType, GameLogic i_GameLogic)
         {
-            return null;
+            Point? retMove = null;
+            //todo: might have to check LastNextCallValue not null
+            TwoDimensionalArrayGenerator<GameBoardCell> generator = i_Board.GetItemsGenerator();
+            
+            while (!generator.HasFinished())
+            {
+                GameBoardCell currentBoardCell = generator.Next();
+                
+                if (currentBoardCell.Type == GameBoardCell.eType.None)
+                {
+                    retMove = generator.LastNextCallPos;
+                    break;
+                }
+            }
+
+            return retMove;
         }
     }
 }

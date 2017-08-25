@@ -30,11 +30,16 @@ namespace C17_Ex02
         }
 
         public static void Main() {
+
+            ReversedTicTacToe.Run();
+
+
+
             //            Generators.RangeGenerator ms = new Generators.RangeGenerator(0, 10);
 
             //Note: NOT you are creating this
-            Board<GameBoardCell> myBoard = new Board<GameBoardCell>(5, 5);
-            doSomethingWithBoard(myBoard);
+//            Board<GameBoardCell> myBoard = new Board<GameBoardCell>(5, 5);
+  //          doSomethingWithBoard(myBoard);
             /*int?[,] myarr = new int?[3, 3];
             for (int i = 0; i < 3; i++)
             {

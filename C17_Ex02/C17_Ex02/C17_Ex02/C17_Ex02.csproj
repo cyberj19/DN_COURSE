@@ -40,6 +40,7 @@
     <Compile Include="Game\GameBoardCell.cs" />
     <Compile Include="Game\GameLogic.cs" />
     <Compile Include="Game\GameManager.cs" />
+    <Compile Include="Game\GameOverConditionsCheckOrder.cs" />
     <Compile Include="Game\Player\ComputerLogic.cs" />
     <Compile Include="Game\Player\HumanLogic.cs" />
     <Compile Include="Game\Player\GamePlayer.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="ReversedTicTacToe.cs" />
     <Compile Include="UI\ConsoleUI.cs" />
+    <Compile Include="UI\ReversedTicTacToeParams.cs" />
     <Compile Include="Utils\ConsoleUtils.cs" />
   </ItemGroup>
   <ItemGroup />

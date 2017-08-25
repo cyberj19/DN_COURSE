@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using C17_Ex02.Generators;
+
 namespace C17_Ex02.BasicDataTypes
 {
     class Board<T>
@@ -113,6 +114,23 @@ namespace C17_Ex02.BasicDataTypes
 
             return new TwoDimensionalArrayGenerator<T>(outerGenerator, innerGenerator, m_Cells);
         }
+
+        /*
+        //todo: Make sure elements not by ref.....
+        public Board<T> Duplicate()
+        {
+            Board<T> retBoard = new Board<T>(m_NumCols, m_NumCols);
+
+            for (int curr_row = 0; curr_row < m_NumRows; curr_row++)
+            {
+                for (int curr_col = 0; curr_col < m_NumCols; curr_col++)
+                {
+                    retBoard.m_Cells[curr_row, curr_col] = m_Cells[curr_row, curr_col];
+                }
+            }
+
+            return retBoard;
+        }*/
 
     }
 }

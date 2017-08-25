@@ -19,11 +19,22 @@ namespace C17_Ex02.Game
             UnknownFailure
         }
 
+        private const int k_DrawValue = -1;
         private readonly GamePlayer[] m_Players;
         private readonly Board<GameBoardCell> m_Board;
         private readonly GameLogic m_Logic;
         private uint m_CurrPlayersTurn = 0;
-        private uint? m_Winner = null;
+        private int? m_Winner = null;
+
+        //todo: Rethink if should allow anything from the outside to access the board this way! encapsulation, perhaps duplicate it
+        public Board<GameBoardCell> Board
+        {
+            get
+            {
+                return m_Board;
+            }
+        }
+
 
         public GameManager(uint i_BoardSize, GamePlayer[] i_Players)
         {
@@ -85,7 +96,7 @@ namespace C17_Ex02.Game
         private eMoveResult performMove(Point i_Move)
         {
             eMoveResult retResult;
-            uint? victoriousPlayer;
+            int? victoriousPlayer;
 
             m_Board.Set(i_Move, m_Players[m_CurrPlayersTurn].GenereateCell());
             victoriousPlayer = m_Logic.GetVictorious();
