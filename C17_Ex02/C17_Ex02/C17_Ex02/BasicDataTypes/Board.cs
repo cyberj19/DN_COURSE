@@ -13,7 +13,7 @@ namespace C17_Ex02.BasicDataTypes
         private const int k_OneItemRightAfterEachRowIteration = 1;
         private const int k_OneItemLeft = -1;
         private const int k_OneItemLeftAfterEachRowIteration = -1;
-        private T[,] m_Cells;
+        private readonly T[,] m_Cells;
         private readonly uint m_NumRows;
         private readonly uint m_NumCols;
         
@@ -45,7 +45,7 @@ namespace C17_Ex02.BasicDataTypes
         public void Set(Point i_Pos, T i_NewCell)
         {
             //todo: MAke sure Y and x at right pos
-            m_Cells[i_Pos.Y, i_Pos.X] = i_NewCell;
+            m_Cells[i_Pos.Y, i_Pos.X] = i_NewCell; //todo: the array should be read only. how does this work? 
         }
 
         public T Get(Point i_Pos)
