@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using C17_Ex02.BasicDataTypes;
-using C17_Ex02.Game;
 
 namespace C17_Ex02.Game.Player
 {
@@ -35,9 +34,10 @@ namespace C17_Ex02.Game.Player
             }
         }
 
-        public GamePlayer(eType i_Type)
+        public GamePlayer(eType i_Type, GameBoardCell.eType i_CellType)
         {
             m_Type = i_Type;
+            m_CellType = i_CellType;
         }
 
         public bool IsInputRequiredForMove()
@@ -58,6 +58,11 @@ namespace C17_Ex02.Game.Player
             }
 
             return isInputRequired;
+        }
+
+        public GameBoardCell GenereateCell()
+        {
+            return new GameBoardCell(m_CellType);
         }
 
         public Point? MakeMove(Board<GameBoardCell> i_Board, GameLogic i_GameLogic, Point? i_Input)

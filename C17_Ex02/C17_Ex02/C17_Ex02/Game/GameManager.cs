@@ -19,19 +19,17 @@ namespace C17_Ex02.Game
             UnknownFailure
         }
 
-        private GamePlayer[] m_Players;
-        private uint m_CurrPlayersTurn = 0;
-        private uint? m_Winner = null;
+        private readonly GamePlayer[] m_Players;
         private readonly Board<GameBoardCell> m_Board;
         private readonly GameLogic m_Logic;
+        private uint m_CurrPlayersTurn = 0;
+        private uint? m_Winner = null;
 
-        //todo: Should randomize who goes first?
-        //todo: array of players
-        public GameManager(uint i_BoardSize, GamePlayer i_FirstPlayer, GamePlayer i_SecondPlayer)
+        public GameManager(uint i_BoardSize, GamePlayer[] i_Players)
         {
-            m_Players = new GamePlayer[2] {i_FirstPlayer, i_SecondPlayer};
+            m_Players = i_Players;
             m_Board = new Board<GameBoardCell>(i_BoardSize, i_BoardSize);
-            m_Logic = new GameLogic(); //todo: Need to get board...
+            m_Logic = new GameLogic(m_Board, m_Players);
         }
 
         public bool IsInputRequiredForCurrentTurn()
@@ -54,42 +52,55 @@ namespace C17_Ex02.Game
             }
             else 
             {
-                Point? currMove = m_Players[m_CurrPlayersTurn].MakeMove(m_Board, m_Logic, i_InputForMove);
-                if (!currMove.HasValue)
+                retResult = handleMakeMoveRequest(i_InputForMove);
+            }
+
+            return retResult;
+        }
+
+        private eMoveResult handleMakeMoveRequest(Point? i_InputForMove)
+        {
+            eMoveResult retResult;
+
+            Point? currMove = m_Players[m_CurrPlayersTurn].MakeMove(m_Board, m_Logic, i_InputForMove);
+            if (!currMove.HasValue)
+            {
+                retResult = eMoveResult.BadInput; //todo: If computer returns null? 
+            }
+            else
+            {
+                if (!m_Logic.IsMoveValid((Point)currMove))
                 {
-                    retResult = eMoveResult.BadInput; //todo: If computer returns null? 
+                    retResult = eMoveResult.UnknownFailure;
                 }
                 else
                 {
-                    //todo: MAke this function look better not 5 if's
-                    if (!m_Logic.IsMoveValid((Point)currMove))
-                    {
-                        retResult = eMoveResult.UnknownFailure;
-                    }
-                    else
-                    {
-                        //todo: Move to function
-                        GameBoardCell newCell = new GameBoardCell(m_Players[m_CurrPlayersTurn].CellType);
-                        m_Board.Set((Point)currMove, newCell);
+                    retResult = performMove((Point)currMove);
+                }
+            }
 
-                        uint? victoriousPlayer = m_Logic.GetVictorious();
+            return retResult;
+        }
 
-                        if (victoriousPlayer.HasValue)
-                        {
-                            m_Winner = victoriousPlayer;
-                            retResult = eMoveResult.GameOver;
-                        }
-                        else
-                        {
-                            retResult = eMoveResult.Success;
+        private eMoveResult performMove(Point i_Move)
+        {
+            eMoveResult retResult;
+            uint? victoriousPlayer;
 
-                            m_CurrPlayersTurn++;
-                            if (m_CurrPlayersTurn >= m_Players.Length)
-                            {
-                                m_CurrPlayersTurn = 0;
-                            }
-                        }
-                    }
+            m_Board.Set(i_Move, m_Players[m_CurrPlayersTurn].GenereateCell());
+            victoriousPlayer = m_Logic.GetVictorious();
+            if (victoriousPlayer.HasValue)
+            {
+                m_Winner = victoriousPlayer;
+                retResult = eMoveResult.GameOver;
+            }
+            else
+            {
+                retResult = eMoveResult.Success;
+                m_CurrPlayersTurn++;
+                if (m_CurrPlayersTurn >= m_Players.Length)
+                {
+                    m_CurrPlayersTurn = 0;
                 }
             }
 

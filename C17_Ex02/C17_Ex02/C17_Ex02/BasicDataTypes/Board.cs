@@ -41,6 +41,11 @@ namespace C17_Ex02.BasicDataTypes
             m_Cells = new T[i_NumRows, i_NumCols];
         }
 
+        public bool IsInBounds(Point i_Pos)
+        {
+            return (i_Pos.X < m_NumCols) && (i_Pos.Y < m_NumRows);
+        }
+
         //todo: Consider changing to bool, but then we should check after each time instead of throwing an exception
         public void Set(Point i_Pos, T i_NewCell)
         {
