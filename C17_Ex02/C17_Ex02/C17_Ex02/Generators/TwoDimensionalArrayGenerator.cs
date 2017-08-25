@@ -39,11 +39,7 @@ namespace C17_Ex02.Generators
             m_OuterRangeGenerator = i_OuterRangeGenerator;
             m_ArrayObject = i_ArrayObject;
 
-            if (!HasFinished())
-            {
-                m_CurrOuterIterator = m_OuterRangeGenerator.Next();
-                m_CurrInnerIterator = m_InnerRangeGenerator.Next();
-            }
+            initIterators();
         }
 
         public T Next()
@@ -66,10 +62,16 @@ namespace C17_Ex02.Generators
 
             return ret;
         }
-
-        public bool HasFinished()
+        //todo: returns that finished one step before finished?
+        public bool HasIteratorsFinished()
         {
             return m_OuterRangeGenerator.HasFinished() && m_InnerRangeGenerator.HasFinished();
+        }
+
+        //todo: this is the new one, according to current values?  make sure it solves the problem
+        public bool HasFinished()
+        {
+            return (!m_CurrInnerIterator.HasValue) && (!m_CurrOuterIterator.HasValue);
         }
 
         public bool IsOuterIterChangedSinceLastCheck()
@@ -85,7 +87,17 @@ namespace C17_Ex02.Generators
         {
             m_InnerRangeGenerator.Reset();
             m_OuterRangeGenerator.Reset();
-            m_IsOuterIterChangedSinceLastCheck = true;
+            initIterators();
+        }
+
+        private void initIterators()
+        {
+            if (!HasIteratorsFinished())
+            {
+                m_IsOuterIterChangedSinceLastCheck = true;
+                m_CurrOuterIterator = m_OuterRangeGenerator.Next();
+                m_CurrInnerIterator = m_InnerRangeGenerator.Next();
+            }
         }
     }
 }
