@@ -47,6 +47,8 @@
     <Compile Include="Generators\TwoDimensionalArrayGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ReversedTicTacToe.cs" />
+    <Compile Include="UI\ConsoleUI.cs" />
+    <Compile Include="Utils\ConsoleUtils.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

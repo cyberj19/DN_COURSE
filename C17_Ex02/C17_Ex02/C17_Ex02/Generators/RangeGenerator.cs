@@ -34,7 +34,7 @@ namespace C17_Ex02.Generators
 
         public RangeGenerator(int i_StartIndex, int i_EndIndex)
         {
-            m_StartIndex = i_StartIndex;
+            m_CurrIndex = m_StartIndex = i_StartIndex;
             m_EndIndex = i_EndIndex;
         }
 
