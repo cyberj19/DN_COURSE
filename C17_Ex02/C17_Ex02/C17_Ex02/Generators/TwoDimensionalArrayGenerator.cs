@@ -32,7 +32,6 @@ namespace C17_Ex02.Generators
             }
         }
 
-
         public TwoDimensionalArrayGenerator(RangeGenerator i_OuterRangeGenerator, RangeGenerator i_InnerRangeGenerator, T[,] i_ArrayObject)
         {
             m_InnerRangeGenerator = i_InnerRangeGenerator;
@@ -46,14 +45,14 @@ namespace C17_Ex02.Generators
         {
             T ret = default(T);
 
-            if (!((m_CurrOuterIterator == null) || (m_CurrOuterIterator == null)))
+            if (!HasFinished())
             {
                 //todo: make sure right order in brackets
                 ret = m_ArrayObject[(int)m_CurrOuterIterator, (int)m_CurrInnerIterator];
                 if (m_InnerRangeGenerator.HasFinished())
                 {
                     m_InnerRangeGenerator.Reset();
-                    m_CurrOuterIterator = m_OuterRangeGenerator.Next();
+                    m_CurrOuterIterator = m_OuterRangeGenerator.Next(); //todo: If finishedm will contain null. Doc about it or change to be clearer
                     m_IsOuterIterChangedSinceLastCheck = true;
                 }
 
@@ -71,7 +70,7 @@ namespace C17_Ex02.Generators
         //todo: this is the new one, according to current values?  make sure it solves the problem
         public bool HasFinished()
         {
-            return (!m_CurrInnerIterator.HasValue) && (!m_CurrOuterIterator.HasValue);
+            return (!m_CurrOuterIterator.HasValue) || (!m_CurrInnerIterator.HasValue);
         }
 
         public bool IsOuterIterChangedSinceLastCheck()
