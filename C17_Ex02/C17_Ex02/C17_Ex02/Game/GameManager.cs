@@ -26,7 +26,7 @@ namespace C17_Ex02.Game
         private readonly GameLogic m_Logic;
 
         //todo: Should randomize who goes first?
-
+        //todo: array of players
         public GameManager(uint i_BoardSize, GamePlayer i_FirstPlayer, GamePlayer i_SecondPlayer)
         {
             m_Players = new GamePlayer[2] {i_FirstPlayer, i_SecondPlayer};

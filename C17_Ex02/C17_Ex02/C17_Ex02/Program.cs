@@ -19,10 +19,16 @@ namespace C17_Ex02
 
             while (!generator.HasFinished())
             {
-                GameBoardCell curr = generator.Next();
+                if (generator.IsOuterIterChangedSinceLastCheck())
+                {
+                    //this is a new line...
+                }
+
+                GameBoardCell currCell = generator.Next();
                 //do something with current cell..
             }
         }
+
         public static void Main() {
             //            Generators.RangeGenerator ms = new Generators.RangeGenerator(0, 10);
 
