@@ -19,15 +19,26 @@ namespace C17_Ex02.UI
 
         public static eGameType GetGameType()
         {
-            return (eGameType)ConsoleUtils.GetPositiveNumberFromUser(String.Format("Please Choose Game Type:{0}{1}. Player vs. Player{0}{2}. Player vs. Computer", System.Environment.NewLine, 1, 2), 1, 2);
+            return (eGameType)ConsoleUtils.GetPositiveNumberFromUser(
+                String.Format(
+                    "Please Choose Game Type:{0}{1}. Player vs. Player{0}{2}. Player vs. Computer",
+                    System.Environment.NewLine,
+                    1,
+                    2),
+                1,
+                2);
 
         }
 
-
-
         public static uint GetBoardSize()
         {
-            return ConsoleUtils.GetPositiveNumberFromUser(String.Format("Please Insert Board Size: (3-9)", k_BoardMinimalSize, k_BoardMaximalSize), k_BoardMinimalSize, k_BoardMaximalSize);
+            return ConsoleUtils.GetPositiveNumberFromUser(
+                String.Format(
+                    "Please Insert Board Size: ({0}-{1})",
+                    k_BoardMinimalSize,
+                    k_BoardMaximalSize),
+                k_BoardMinimalSize,
+                k_BoardMaximalSize);
         }
     }
 }
