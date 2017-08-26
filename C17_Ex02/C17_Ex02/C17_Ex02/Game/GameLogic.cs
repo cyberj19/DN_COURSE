@@ -14,7 +14,7 @@ namespace C17_Ex02.Game
 
         private readonly Board<GameBoardCell> m_Board;
         private readonly GamePlayer[] m_Players;
-
+        
         public GameLogic(Board<GameBoardCell> i_Board, GamePlayer[] i_Players)
         {
             m_Board = i_Board;

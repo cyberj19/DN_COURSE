@@ -8,12 +8,17 @@ namespace C17_Ex02.UI
 {
     class ConsoleUI
     {
+
         const byte k_NumberOfSignsPerColumn = 4;
+
+
+
 
         public static void DrawBoard(Board<GameBoardCell> i_Board)
         {
             byte counter = 1;
-
+            System.Threading.Thread.Sleep(1000);
+            Ex02.ConsoleUtils.Screen.Clear();
             Console.Write(ConsoleUtils.k_SpaceChar.ToString());
             RangeGenerator range = new RangeGenerator(1, (int)i_Board.Cols + 1);
             while (!range.HasFinished())

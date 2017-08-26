@@ -42,6 +42,7 @@
     <Compile Include="Game\GameManager.cs" />
     <Compile Include="Game\GameOverConditionsCheckOrder.cs" />
     <Compile Include="Game\Player\ComputerLogic.cs" />
+    <Compile Include="Game\Player\eGameType.cs" />
     <Compile Include="Game\Player\HumanLogic.cs" />
     <Compile Include="Game\Player\GamePlayer.cs" />
     <Compile Include="Generators\RangeGenerator.cs" />
@@ -52,6 +53,10 @@
     <Compile Include="UI\ReversedTicTacToeParams.cs" />
     <Compile Include="Utils\ConsoleUtils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="Ex02.ConsoleUtils">
+      <HintPath>..\..\..\..\..\..\..\temp\Ex02.ConsoleUtils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

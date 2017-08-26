@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using C17_Ex02.Game;
 using C17_Ex02.UI;
 using C17_Ex02.Game.Player;
 using C17_Ex02.BasicDataTypes;
+using C17_Ex02.Utils;
 
 namespace C17_Ex02
 {
@@ -21,14 +18,17 @@ namespace C17_Ex02
 
             /// todo: NOT THIS WAY
             /// //todo 2# currently both players computer
+            /// 
+
             GamePlayer[] players = new GamePlayer[2] { new GamePlayer(GamePlayer.eType.ComputerPlayer, GameBoardCell.eType.X),
-                                                        new GamePlayer(GamePlayer.eType.ComputerPlayer, GameBoardCell.eType.O)};
+                                                        new GamePlayer((ReversedTicTacToeParams.GetGameType()==eGameType.PVP)?GamePlayer.eType.HumanPlayer:GamePlayer.eType.ComputerPlayer, GameBoardCell.eType.O)};
             ///
 
             while (true)
             {
+
                 //todo: run until input from user "Q"
-                currentGame = new GameManager(5, players);
+                currentGame = new GameManager(ReversedTicTacToeParams.GetBoardSize(), players);
 
                 while (!currentGame.IsGameOver())
                 {

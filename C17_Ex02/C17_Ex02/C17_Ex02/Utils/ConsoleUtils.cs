@@ -37,5 +37,41 @@ namespace C17_Ex02.Utils
             Console.Write(i_MarginStr);
         }
 
+
+        public static uint GetPositiveNumberFromUser(String i_MessageForUser, uint i_MinValidInput, uint i_MaxValidInput)
+        {
+            string userInputStr = string.Empty;
+            uint userInput;
+            bool isValidInput;
+
+            System.Console.WriteLine(i_MessageForUser);
+            do
+            {
+                userInputStr = System.Console.ReadLine();
+                isValidInput = (uint.TryParse(userInputStr, out userInput) &&
+                    (userInput >= i_MinValidInput) &&
+                    (userInput <= i_MaxValidInput));
+                if (!isValidInput)
+                {
+                    System.Console.WriteLine("Invalid input! Please try again:");
+                }
+            }
+            while (!isValidInput);
+
+            return userInput;
+        }
+
+        public static bool IsStringNumeric(string i_Str)
+        {
+            bool IsNumeric = true;
+
+            for (int i = 0; (i < i_Str.Length) && IsNumeric; i++)
+            {
+                IsNumeric = char.IsDigit(i_Str[i]);
+            }
+
+            return IsNumeric;
+        }
+
     }
 }
