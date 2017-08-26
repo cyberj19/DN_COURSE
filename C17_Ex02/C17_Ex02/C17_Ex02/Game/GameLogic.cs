@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using C17_Ex02.BasicDataTypes;
+﻿using C17_Ex02.BasicDataTypes;
 using C17_Ex02.Game.Player;
 using C17_Ex02.Generators;
 
@@ -11,7 +6,6 @@ namespace C17_Ex02.Game
 {
     class GameLogic
     {
-
         private readonly Board<GameBoardCell> m_Board;
         private readonly GamePlayer[] m_Players;
         
@@ -21,66 +15,70 @@ namespace C17_Ex02.Game
             m_Players = i_Players;
         }
 
+        // Check if a board cell is empty
         public bool IsEmptyCell(Point i_Move)
         {
             return m_Board.Get(i_Move).Type == GameBoardCell.eType.None;
         }
 
+        // Check if a move is valid
         public bool IsMoveValid(Point i_Move)
         {
             return m_Board.IsInBounds(i_Move) && IsEmptyCell(i_Move);
         }
 
-
-
-        public int? GetVictorious() //todo: change to int, if draw then -1
+        public GameResult? GetGameResultIfGameOver() //todo: change to int, if draw then -1
         {
-            int? ret = null;
+            GameResult? retGameResult = null;
+
             //todo: //todo: 2#mybe save state so we wont need to iterate each time?
-            GameBoardCell.eType? winner = null;
+            GameBoardCell.eType? winnerCellType = null;
 
             for (uint checkNum = 0; checkNum < GameOverConditionsCheckOrder.NumberOfChecks; checkNum++)
             {
                 switch ((GameOverConditionsCheckOrder.eOrder)checkNum)
                 {
                     case GameOverConditionsCheckOrder.eOrder.LeftDiagonal:
-                        winner = getAllSameType(m_Board.GetLeftDiagonalGenerator());
+                        winnerCellType = getAllSameType(m_Board.GetLeftDiagonalGenerator());
                         break;
                     case GameOverConditionsCheckOrder.eOrder.RightDiagonal:
-                        winner = getAllSameType(m_Board.GetRightDiagonalGenerator());
+                        winnerCellType = getAllSameType(m_Board.GetRightDiagonalGenerator());
                         break;
                     case GameOverConditionsCheckOrder.eOrder.Row:
-                        winner = getAllSameTypeRows();
+                        winnerCellType = getAllSameTypeRows();
                         break;
                     case GameOverConditionsCheckOrder.eOrder.Col:
-                        winner = getAllSameTypeCols();
+                        winnerCellType = getAllSameTypeCols();
                         break;
                     case GameOverConditionsCheckOrder.eOrder.All:
-                        winner = getAllSameTypeAll(); //todo: bad name
+                        if (IsBoardFull())
+                        {
+                            retGameResult = new GameResult(GameResult.eResult.Draw);
+                        }
+
                         break;
                     default:
                         break;
                 }
             }
 
-            //todo: Perhaps instead of going over last function get items generator check on the other functions if there was a none type!
-
-            if (winner.HasValue)
+            if (winnerCellType.HasValue)
             {
-                ret = typeToPlayerIndex((GameBoardCell.eType)winner);
+                retGameResult = new GameResult(GameResult.eResult.PlayerWon, cellTypeToPlayerIndex((GameBoardCell.eType)winnerCellType));
             }
 
-            return ret;
+            return retGameResult;
         }
 
 
-        private int typeToPlayerIndex(GameBoardCell.eType i_Type)
+        private uint cellTypeToPlayerIndex(GameBoardCell.eType i_Type)
         {
-            int retIndex = -1;
-
+            uint? retIndex = null; //todo: make sure it throws on casting if we dont find
+            //todo: need to rethink if wee want to support only 2 players or more here.
+            //todo: currently saying whos the loser but not whos the winner
             if (i_Type != GameBoardCell.eType.None)
             {
-                for (int i = 0; i < m_Players.Length; i++)
+                for (uint i = 0; i < m_Players.Length; i++)
                 {
                     if (i_Type == m_Players[i].CellType)
                     {
@@ -89,32 +87,14 @@ namespace C17_Ex02.Game
                 }
             }
 
-            return retIndex;
+            return (uint)retIndex;
         }
 
-        private GameBoardCell.eType? getAllSameTypeAll()
+        public bool IsBoardFull()
         {
-            TwoDimensionalArrayGenerator<GameBoardCell> generator = m_Board.GetItemsGenerator();
-            GameBoardCell.eType? ret = null;
-            bool checkStatus = true; //todo: refactor on this function, i dont like the loop
-
-            while (!generator.HasFinished())
-            {
-                GameBoardCell currCell = generator.Next();
-
-                if (currCell.Type != GameBoardCell.eType.None)
-                {
-                    checkStatus = false;
-                    break;
-                }
-            }
-
-            if (checkStatus)
-            {
-                ret = GameBoardCell.eType.None;
-            }
-
-            return ret;
+            // note: This cannot be implemented in the Board class itself because there might be games where "Set" is not used uniquely on Board.
+            // So the next calculation wont tell us that the board is full.
+            return (m_Board.Rows * m_Board.Cols) == m_Board.NumTimesSetCalled;
         }
 
 

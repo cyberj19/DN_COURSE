@@ -19,7 +19,7 @@ namespace C17_Ex02.Game
             UnknownFailure
         }
 
-        private const int k_DrawValue = -1;
+        private const int k_DrawWinnerValue = -1;
         private readonly GamePlayer[] m_Players;
         private readonly Board<GameBoardCell> m_Board;
         private readonly GameLogic m_Logic;
@@ -34,7 +34,6 @@ namespace C17_Ex02.Game
                 return m_Board;
             }
         }
-
 
         public GameManager(uint i_BoardSize, GamePlayer[] i_Players)
         {
@@ -53,6 +52,7 @@ namespace C17_Ex02.Game
             return m_Winner.HasValue;
         }
 
+        // handle a make move request from the game runner
         public eMoveResult MakeGameMove(Point? i_InputForMove)
         {
             eMoveResult retResult;
@@ -63,20 +63,21 @@ namespace C17_Ex02.Game
             }
             else 
             {
-                retResult = handleMakeMoveRequest(i_InputForMove);
+                retResult = handleValidMakeMoveRequest(i_InputForMove);
             }
 
             return retResult;
         }
 
-        private eMoveResult handleMakeMoveRequest(Point? i_InputForMove)
+        // Handle a valid move request
+        private eMoveResult handleValidMakeMoveRequest(Point? i_InputForMove)
         {
             eMoveResult retResult;
 
             Point? currMove = m_Players[m_CurrPlayersTurn].MakeMove(m_Board, m_Logic, i_InputForMove);
             if (!currMove.HasValue)
             {
-                retResult = eMoveResult.BadInput; //todo: If computer returns null? 
+                retResult = eMoveResult.BadInput;
             }
             else
             {
@@ -93,17 +94,27 @@ namespace C17_Ex02.Game
             return retResult;
         }
 
+        // Perform a move by one of the players
         private eMoveResult performMove(Point i_Move)
         {
             eMoveResult retResult;
-            int? victoriousPlayer;
+            GameResult? gameResult = null;
 
             m_Board.Set(i_Move, m_Players[m_CurrPlayersTurn].GenereateCell());
-            victoriousPlayer = m_Logic.GetVictorious();
-            if (victoriousPlayer.HasValue)
+            gameResult = m_Logic.GetGameResultIfGameOver();
+
+            if (gameResult.HasValue)
             {
-                m_Winner = victoriousPlayer;
                 retResult = eMoveResult.GameOver;
+                if (gameResult.Value.Result == GameResult.eResult.Draw)
+                {
+                    m_Winner = k_DrawWinnerValue;
+                }
+                else
+                {
+                    m_Winner = (int)gameResult.Value.WinPlayerIndex; //todo: currently looser
+
+                }
             }
             else
             {

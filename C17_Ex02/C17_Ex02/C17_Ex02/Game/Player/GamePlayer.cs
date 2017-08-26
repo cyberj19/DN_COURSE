@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using C17_Ex02.BasicDataTypes;
+﻿using C17_Ex02.BasicDataTypes;
 
 namespace C17_Ex02.Game.Player
 {
@@ -40,6 +35,7 @@ namespace C17_Ex02.Game.Player
             m_CellType = i_CellType;
         }
 
+        // is input required for the next make move request
         public bool IsInputRequiredForMove()
         {
             bool isInputRequired;
@@ -60,11 +56,13 @@ namespace C17_Ex02.Game.Player
             return isInputRequired;
         }
 
+        // Generate a GameBoardCell according to player's cell type
         public GameBoardCell GenereateCell()
         {
             return new GameBoardCell(m_CellType);
         }
 
+        // Make a game move
         public Point? MakeMove(Board<GameBoardCell> i_Board, GameLogic i_GameLogic, Point? i_Input)
         {
             Point? retMove;
@@ -78,8 +76,8 @@ namespace C17_Ex02.Game.Player
                 switch (m_Type)
                 {
                     case eType.ComputerPlayer:
-                        retMove = ComputerLogic.MakeMove(i_Board, m_CellType, i_GameLogic); //todo: Consider instead of doing this static, make instace so it holds last move each time. less iterations needed
-                        break; //todo: Need spacing after each break?
+                        retMove = ComputerLogic.MakeMove(i_Board, m_CellType, i_GameLogic);
+                        break;
                     case eType.HumanPlayer:
                         retMove = HumanLogic.MakeMove(i_Board, (Point)i_Input, m_CellType, i_GameLogic);
                         break;
@@ -91,6 +89,5 @@ namespace C17_Ex02.Game.Player
 
             return retMove;
         }
-
     }
 }

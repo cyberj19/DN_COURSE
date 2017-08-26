@@ -11,6 +11,7 @@
             {
                 return m_X;
             }
+
             set
             {
                 m_X = value;
@@ -23,6 +24,7 @@
             {
                 return m_Y;
             }
+
             set
             {
                 m_Y = value;

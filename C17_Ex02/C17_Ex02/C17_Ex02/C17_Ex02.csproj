@@ -41,6 +41,7 @@
     <Compile Include="Game\GameLogic.cs" />
     <Compile Include="Game\GameManager.cs" />
     <Compile Include="Game\GameOverConditionsCheckOrder.cs" />
+    <Compile Include="Game\GameResult.cs" />
     <Compile Include="Game\Player\ComputerLogic.cs" />
     <Compile Include="Game\Player\eGameType.cs" />
     <Compile Include="Game\Player\HumanLogic.cs" />

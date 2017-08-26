@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace C17_Ex02.Game
+﻿namespace C17_Ex02.Game
 {
+    // Represents a cell in the Board
     struct GameBoardCell
     {
         public enum eType
@@ -27,31 +22,6 @@ namespace C17_Ex02.Game
                 return m_Type;
             }
         }
-        /* todo
-        public static GameBoardCell X
-        {
-            get
-            {
-                return new GameBoardCell(eType.X);
-            }
-        }
-
-        public static GameBoardCell O
-        {
-            get
-            {
-                return new GameBoardCell(eType.O);
-            }
-        }
-
-        public static GameBoardCell None
-        {
-            get
-            {
-                return new GameBoardCell(eType.None);
-            }
-        }
-        */
 
         public GameBoardCell(eType i_Type)
         {

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace C17_Ex02.Game.Player
+﻿namespace C17_Ex02.Game.Player
 {
     enum eGameType
-    {
+    { //todo: why 1 and 2?
         PlayerVsPlayer = 1,
         PlayerVsComputer = 2,
     }

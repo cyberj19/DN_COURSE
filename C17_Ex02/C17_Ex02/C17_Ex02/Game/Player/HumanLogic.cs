@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using C17_Ex02.BasicDataTypes;
+﻿using C17_Ex02.BasicDataTypes;
 
-    //todo: Go over all using, make sure in all files doing new line after it
 namespace C17_Ex02.Game.Player
 {
     class HumanLogic
     {
+        // Makes a move. If bad input was recv, will return null.
         static public Point? MakeMove(Board<GameBoardCell> i_Board, Point i_Input, GameBoardCell.eType i_CellType, GameLogic i_GameLogic)
         {
             Point? retMove = null;

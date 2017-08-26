@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using C17_Ex02.Generators;
+﻿using C17_Ex02.Generators;
 
 namespace C17_Ex02.BasicDataTypes
 {
+    // Represents a board with type 'T' Cells
     class Board<T>
     {
         private const int k_FirstItemInRowIndex = 0;
@@ -17,7 +13,8 @@ namespace C17_Ex02.BasicDataTypes
         private readonly T[,] m_Cells;
         private readonly uint m_NumRows;
         private readonly uint m_NumCols;
-        
+        private uint m_NumTimesSetCalled = 0;
+
         public uint Rows
         {
             get
@@ -34,60 +31,68 @@ namespace C17_Ex02.BasicDataTypes
             }
         }
 
+        public uint NumTimesSetCalled
+        {
+            get
+            {
+                return m_NumTimesSetCalled;
+            }
+        }
+
         public Board(uint i_NumRows, uint i_NumCols)
         {
-            //todo: Max Rows/Cols? atleast not empty. Right diago function needs last item..
             m_NumRows = i_NumRows;
             m_NumCols = i_NumCols;
             m_Cells = new T[i_NumRows, i_NumCols];
         }
 
+        // check if position is in bounds of the board
         public bool IsInBounds(Point i_Pos)
         {
             return (i_Pos.X < m_NumCols) && (i_Pos.Y < m_NumRows);
         }
 
-        //todo: Consider changing to bool, but then we should check after each time instead of throwing an exception
+        // Set cell of specific index
         public void Set(Point i_Pos, T i_NewCell)
         {
-            //todo: MAke sure Y and x at right pos
-            m_Cells[i_Pos.Y, i_Pos.X] = i_NewCell; //todo: the array should be read only. how does this work? 
+            m_Cells[i_Pos.Y, i_Pos.X] = i_NewCell;
+            m_NumTimesSetCalled++;
         }
 
+        // Get cell at specific index
         public T Get(Point i_Pos)
         {
             return m_Cells[i_Pos.Y, i_Pos.X];
         }
 
+        // Get regular generator, access all items
         public TwoDimensionalArrayGenerator<T> GetItemsGenerator()
         {
-            //todo: Same thing with x and y. if Y stays first there's no problem with the outer
             RangeGenerator outerGenerator = new RangeGenerator((int)m_NumRows);
             RangeGenerator innerGenerator = new RangeGenerator((int)m_NumCols);
 
             return new TwoDimensionalArrayGenerator<T>(outerGenerator, innerGenerator, m_Cells);
         }
 
+        // Get row generator, access items in a specific row
         public TwoDimensionalArrayGenerator<T> GetRowGenerator(uint i_Row)
         {
-            //todo: Check irow out of bounds or wait for exception to be thrown later?
-            //todo: Same thing with x and y. if Y stays first there's no problem with the outer
             RangeGenerator outerGenerator = new RangeGenerator((int)i_Row, (int)i_Row + 1);
             RangeGenerator innerGenerator = new RangeGenerator((int)m_NumCols);
 
             return new TwoDimensionalArrayGenerator<T>(outerGenerator, innerGenerator, m_Cells);
         }
 
+        // Get col generator, access items in a specific col
         public TwoDimensionalArrayGenerator<T> GetColGenerator(uint i_Column)
         {
-            //todo: Check irow out of bounds or wait for exception to be thrown later?
-            //todo: Same thing with x and y. if Y stays first there's no problem with the outer
             RangeGenerator outerGenerator = new RangeGenerator((int)m_NumRows);
             RangeGenerator innerGenerator = new RangeGenerator((int)i_Column, (int)i_Column + 1);
 
             return new TwoDimensionalArrayGenerator<T>(outerGenerator, innerGenerator, m_Cells);
         }
 
+        // Get left diagonal generator, access items in the Left Diagonal (Starting from top-left)
         public TwoDimensionalArrayGenerator<T> GetLeftDiagonalGenerator()
         {
             RangeGenerator outerGenerator = new RangeGenerator((int)m_NumRows);
@@ -101,6 +106,7 @@ namespace C17_Ex02.BasicDataTypes
             return new TwoDimensionalArrayGenerator<T>(outerGenerator, innerGenerator, m_Cells);
         }
 
+        // Get right diagonal generator, access items in the Right Diagonal (Starting from top-Right)
         public TwoDimensionalArrayGenerator<T> GetRightDiagonalGenerator()
         {
             int lastItemInRowIndex = (int)m_NumCols;
@@ -114,24 +120,5 @@ namespace C17_Ex02.BasicDataTypes
 
             return new TwoDimensionalArrayGenerator<T>(outerGenerator, innerGenerator, m_Cells);
         }
-
-        /*
-        //todo: Make sure elements not by ref.....
-        public Board<T> Duplicate()
-        {
-            Board<T> retBoard = new Board<T>(m_NumCols, m_NumCols);
-
-            for (int curr_row = 0; curr_row < m_NumRows; curr_row++)
-            {
-                for (int curr_col = 0; curr_col < m_NumCols; curr_col++)
-                {
-                    retBoard.m_Cells[curr_row, curr_col] = m_Cells[curr_row, curr_col];
-                }
-            }
-
-            return retBoard;
-        }*/
-
     }
 }
-//todo: add style cop conf to main sln consider deleting proj conf
