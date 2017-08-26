@@ -21,7 +21,7 @@ namespace C17_Ex02
             /// 
 
             GamePlayer[] players = new GamePlayer[2] { new GamePlayer(GamePlayer.eType.ComputerPlayer, GameBoardCell.eType.X),
-                                                        new GamePlayer((ReversedTicTacToeParams.GetGameType()==eGameType.PVP)?GamePlayer.eType.HumanPlayer:GamePlayer.eType.ComputerPlayer, GameBoardCell.eType.O)};
+                                                        new GamePlayer((ReversedTicTacToeParams.GetGameType()==eGameType.PlayerVsPlayer)?GamePlayer.eType.HumanPlayer:GamePlayer.eType.ComputerPlayer, GameBoardCell.eType.O)};
             ///
 
             while (true)

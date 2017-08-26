@@ -8,7 +8,7 @@ namespace C17_Ex02.Game.Player
 {
     enum eGameType
     {
-        PVP =1,
-        PVE =2,
+        PlayerVsPlayer = 1,
+        PlayerVsComputer = 2,
     }
 }
