@@ -23,10 +23,10 @@ namespace C17_Ex02.UI
                 String.Format(
                     "Please Choose Game Type:{0}{1}. Player vs. Player{0}{2}. Player vs. Computer",
                     System.Environment.NewLine,
-                    1,
-                    2),
-                1,
-                2);
+                    eGameType.PlayerVsPlayer,
+                    eGameType.PlayerVsComputer),
+                (uint)eGameType.PlayerVsPlayer,
+                (uint)eGameType.PlayerVsComputer);
 
         }
 
