@@ -3,6 +3,8 @@ using C17_Ex02.BasicDataTypes;
 using C17_Ex02.Game;
 using C17_Ex02.Utils;
 using C17_Ex02.Generators;
+using System.Collections.Generic;
+using C17_Ex02.Game.Player;
 
 namespace C17_Ex02.UI
 {
@@ -12,7 +14,16 @@ namespace C17_Ex02.UI
         const byte k_NumberOfSignsPerColumn = 4;
 
 
+        public static void PrintScoreList(List<int> i_Scores)
+        {
+            int i = 0;
 
+            System.Console.WriteLine("The Current Scores Are:");
+            foreach (int score in i_Scores)
+            {
+                System.Console.WriteLine((ePlayerID)i++ + ": " + score);
+            }
+        }
 
         public static void DrawBoard(Board<GameBoardCell> i_Board)
         {

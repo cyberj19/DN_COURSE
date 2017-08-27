@@ -44,8 +44,10 @@
     <Compile Include="Game\GameResult.cs" />
     <Compile Include="Game\Player\ComputerLogic.cs" />
     <Compile Include="Game\Player\eGameType.cs" />
+    <Compile Include="Game\Player\ePlayerID.cs" />
     <Compile Include="Game\Player\HumanLogic.cs" />
     <Compile Include="Game\Player\GamePlayer.cs" />
+    <Compile Include="Game\ScoreHolder.cs" />
     <Compile Include="Generators\RangeGenerator.cs" />
     <Compile Include="Generators\TwoDimensionalArrayGenerator.cs" />
     <Compile Include="Program.cs" />
